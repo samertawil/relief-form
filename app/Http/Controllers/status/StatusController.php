@@ -19,7 +19,8 @@ class statusController extends Controller
     {
         $systems_data =  setting_system::get();
       
-        $all_data=status::with(['status_p_id_sub','status_p_id'])->select('status_name','id', 'p_id', 'p_id_sub')->get();
+        $all_data=status::with(['systemname','status_p_id_sub','status_p_id'])->select('status_name','id', 'p_id', 'p_id_sub','used_in_system_id')->get();
+    
         return view('status.create',compact('systems_data','all_data'));
      
       

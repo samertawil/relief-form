@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PhpParser\Node\Expr\FuncCall;
 
 class setting_system extends Model
 {
@@ -15,6 +16,5 @@ class setting_system extends Model
 
     // }
 
-
-
+       
 }

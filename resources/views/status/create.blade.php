@@ -1,6 +1,10 @@
 @extends('layouts.master')
 
+@section('css-link')
 
+<link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+
+@endsection
 
 
 @section('content')
@@ -18,7 +22,7 @@
                     @csrf
                     <div class=" form-group px-2">
                         <label for="system_name_id">اسم النظام</label>
-                        <input name="system_name" type="text" @class(['form-control', 'is-invalid' => $errors->has('system_name')]) id="system_name_id">
+                        <input name="system_name" type="text" @class(['form-control', 'is-invalid' => $errors->has('system_name')]) id="system_name_id" title="اسماء الانظمة الرئيسة المشغولة بهذا البرنامج">
                         @include('layouts._show_error', ['field_name' => 'system_name'])
                     </div>
                     <div class="  form-group px-2">
@@ -100,7 +104,7 @@
                     <select class="custom-select form-control" name="used_in_system_id" id="used_in_system_id">
                         <option value="" hidden>اختار </option>
                         @foreach ($systems_data as $system_data )
-                            <option value="{{ $system_data->id }}">{{ $system_data->system_name }}</option>
+                            <option value="{{ $system_data->id }}">{{ $system_data->system_name  }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -145,7 +149,7 @@
                 <th>status_name</th>
                 <th>p_id</th>
                 <th>p_id_sub</th>
-                <th></th>
+                <th>اسم النظام</th>
             </thead>
             <tbody>
                
@@ -155,7 +159,7 @@
                     <td>{{$data->status_name}}</td>
                     <td>{{$data->status_p_id->status_name??'//'}}</td>
                     <td>{{$data->status_p_id_sub->status_name??'//'}}</td>
-                    <td></td>
+                    <td>{{$data->systemname->system_name??''}}</td>
                     <td></td>
                     <td></td> 
                 </tr>

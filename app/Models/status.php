@@ -10,9 +10,10 @@ class status extends BaseModel
 
     protected $fillable = [
         'status_name', 'p_id',
-        'p_id_sub', 'used_in_program_id',
+        'p_id_sub', 
         'route_name', 'page_name',
         'route_system_name', 'description',
+        'used_in_system_id',
     ];
 
 
@@ -36,6 +37,10 @@ class status extends BaseModel
 
     public function status_p_id_sub() {
         return $this->hasOne(status::class,'id','p_id_sub');
+    }
+
+    public function systemname() {
+        return $this->hasOne(setting_system::class,'id','used_in_system_id');
     }
 
    
