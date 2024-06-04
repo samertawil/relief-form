@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\settingcontrollers;
+namespace App\Modules\Status\Http\Controllers\settingcontrollers;
 
-use App\Http\Controllers\Controller;
-use App\Models\setting_system;
+use App\Modules\Status\Models\setting_system;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
  
 
 

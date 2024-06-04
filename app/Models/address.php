@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Modules\Status\Models\status;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class address extends Model
-{
+{ 
     use HasFactory;
+    use SoftDeletes;
 
 protected $fillable=['address_name',	'region_id',	'city_id',	'area_id',	'neighbourhood_id',	'street_id',
 	'nearest_location_type',	'address_specific',	'address_type',	'gis',	'active',	'user_id',	'near_loc_id'];
@@ -53,4 +56,23 @@ protected $fillable=['address_name',	'region_id',	'city_id',	'area_id',	'neighbo
     public function streetname() {
         return $this->hasOne(street::class,'id','street_id');
     }
+
+ 
+
+    public function nearestlocname() {
+        return $this->hasOne(status::class,'id','nearest_location_type');
+    }
+
+    
+
+    public function locname() {
+        return $this->hasOne(location::class,'id','near_loc_id');
+    }
+
+    
+
+    public function addresstypename() {
+        return $this->hasOne(status::class,'id','address_type');
+    }
+
 }

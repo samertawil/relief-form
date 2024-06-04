@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\status;
+namespace App\Modules\Status\Http\Controllers\status;
 
-use App\Models\setting_system;
-use App\Models\status;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+ 
+use App\Modules\Status\Models\status;
+use App\Modules\Status\Models\setting_system;
 
 class statusController extends Controller
 {
@@ -19,11 +20,12 @@ class statusController extends Controller
     {
         $systems_data =  setting_system::get();
       
-        $all_data=status::with(['systemname','status_p_id_sub','status_p_id'])->select('status_name','id', 'p_id', 'p_id_sub','used_in_system_id')->get();
+        $all_data=status::with(['systemname','status_p_id_sub','status_p_id'])->select('status_name','id', 'p_id', 'p_id_sub','used_in_system_id')->
+        orderby('p_id_sub','asc')->OrderBy('id', 'asc')->get();
     
-        return view('status.create',compact('systems_data','all_data'));
+         return view('StatusModule::status.create',compact('systems_data','all_data'));
      
-      
+ 
     }
 
   

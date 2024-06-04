@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+
+ 
+
  
 
     @yield('css-link')
@@ -82,7 +85,7 @@
     <script src="{{ asset('js/all.min.js') }}"></script>  
     <script src="{{ asset('js/bootstrap.js') }}"></script>
     <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script> 
-   
+ 
     @yield('js')
 </body>
 

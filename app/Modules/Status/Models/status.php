@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Status\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Modules\status\Models\setting_system;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class status extends BaseModel
 {

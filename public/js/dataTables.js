@@ -10350,7 +10350,7 @@
 		/**
 		 * Define the starting point for data display when using DataTables with
 		 * pagination. Note that this parameter is the number of records, rather than
-		 * the page number, so if you have 10 records per page and want to start on
+		 * the page number, so if you have 10 records  and want to start on
 		 * the third page, it should be "20".
 		 */
 		"iDisplayStart": 0,
@@ -10527,7 +10527,7 @@
 			 * with a default select list of 10, 25, 50 and 100, and can be replaced
 			 * with a custom select box if required.
 			 */
-			"sLengthMenu": "_MENU_ _ENTRIES_ per page",
+			"sLengthMenu": "_MENU_عدد الصفحات"  ,
 	
 	
 			/**
@@ -10554,7 +10554,7 @@
 			 * control over where it appears in the string. If "_INPUT_" is not given
 			 * then the input box is appended to the string automatically.
 			 */
-			"sSearch": "Search:",
+			"sSearch": "البحث",
 	
 	
 			/**

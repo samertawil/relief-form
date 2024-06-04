@@ -7,18 +7,22 @@
 
         @include('layouts._error_form')
 
-        <form action="{{ route('address.store') }}" method="post">
+        <form action="{{ route('address.update',$address->id) }}" method="post">
             @csrf
+            @method('put')
+         
             @include('address._addressForm')
-            
+
             <div>
-                @include('layouts.2button')
+                @include('layouts.2button',['name'=>'تحديث'])
             </div>
+
+
 
         </form>
 
     </section>
 
-    @include('address._addressTable')
+    {{-- @include('address._addressTable') --}}
 
 @endsection

@@ -9,13 +9,23 @@
             </button>
 
 
-
-
-
             <div class="collapse navbar-collapse navmenu">
                 <ul class="navbar-nav" style="text-align: start;">
                     <li class="nav-item px-2"><a href="#" class="nav-link">الرئيسية</a></li>
-                    <li class="nav-item px-2"><a href="#" class="nav-link">معرض</a></li>
+                  
+                  
+                    <div class="dropdown nav-item ">
+                        <button class="btn  dropdown-toggle  nav-link" type="button" id="address_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            العناوين والثوابت
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="address_menu">
+                          <a class="dropdown-item" href="{{route('address.index')}}">قائمة العناوين</a>
+                          <a class="dropdown-item" href="{{route('address.create')}}"> اضافة عنوان جديد</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item " href="{{route('status.create')}}">ثوابت النظام</a>
+                         
+                        </div>
+                      </div>
                     <li class="nav-item px-2"><a href="#" class="nav-link">رؤيتنا</a></li>
                     <li class="nav-item px-2"><a href="#" class="nav-link">اتصل بنا</a></li>
                     <li class="nav-item px-2"><a href="#" class="nav-link">مدونات</a></li>
