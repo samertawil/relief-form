@@ -26,5 +26,9 @@ class StatusServiceProvider extends ServiceProvider
        $this->loadMigrationsFrom(__DIR__.'/../Migrations');
        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
        $this->loadViewsFrom(__DIR__.'/../resources/views/','StatusModule');
+
+       $this->publishes([__DIR__.'/../public' => public_path('vendor/StatusModule'),
+    ], 'public');
+ 
     }
 }

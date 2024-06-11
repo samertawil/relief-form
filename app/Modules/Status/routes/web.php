@@ -1,6 +1,13 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
+use App\Modules\status\Http\Controllers\settingcontrollers\SystemnameController;
+use App\Modules\status\Http\Controllers\status\StatusController;
 
-require __DIR__.'/setting.php';
+Route::middleware(['guest', 'web','auth'])->group(function () {
+
+	Route::resource('/status',StatusController::class);
+	Route::post('system/store/',[SystemnameController::class,'store'])->name('system.store');
+
+
+});
  

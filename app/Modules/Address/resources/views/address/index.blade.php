@@ -2,6 +2,6 @@
 
 @section('content')
 
-@include('address._addressTable')
+@include('AddressModule::address._addressTable')
 
 @endsection

@@ -3,6 +3,7 @@
 @section('css-link')
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/screenMediaCss.css') }}">
+ 
 @endsection
 
 @section('content')
@@ -11,7 +12,7 @@
     @include('layouts._error_form')
 
 
-
+ 
     <section class="container my-2">
 
         <a  data-toggle="collapse" href="#collapse-system" aria-expanded="true" aria-controls="collapse-system"
@@ -32,14 +33,14 @@
 
                         @csrf
                         <div class=" form-group px-2">
-                            <label for="system_name_id">اسم النظام</label>
-                            <input name="system_name" type="text" @class(['form-control', 'is-invalid' => $errors->has('system_name')]) id="system_name_id"
+                            <label for="system_name_id">{{__('mytrans.system_name')}}</label>
+                            <input name="system_name" type="text"  value="{{old('system_name')}}" @class(['form-control', 'is-invalid' => $errors->has('system_name')]) id="system_name_id"
                                 title="اسماء الانظمة الرئيسة المشغولة بهذا البرنامج">
                             @include('layouts._show_error', ['field_name' => 'system_name'])
                         </div>
                         <div class="  form-group px-2">
-                            <label for="description_id">وصف النظام</label>
-                            <input name="description" type="text" @class(['form-control', 'is-invalid' => $errors->has('description')]) id="description_id">
+                            <label for="description_id">{{(__('mytrans.description'))}}</label>
+                            <input name="description" type="text"  value="{{old('description')}}"  @class(['form-control', 'is-invalid' => $errors->has('description')]) id="description_id" title="شرح بسيط عن النظام">
                             @include('layouts._show_error', ['field_name' => 'description'])
                         </div>
                     </div>
@@ -57,9 +58,9 @@
                 <table class="table  my-5">
                     <thead>
                         <th>#</th>
-                        <th>اسم النظام</th>
+                        <th>{{__('mytrans.system_name')}}</th>
                         <th>حالة النظام</th>
-                        <th>وصف النظام</th>
+                        <th>{{__('mytrans.description')}}</th>
                     </thead>
                     <tbody>
 
@@ -173,8 +174,8 @@
     </div>
     </section>
 
-    <section class=" mb-5 mt-3 container table_direction ">
-        <table class="table border text-center hover " id="mytable" style="direction: rtl;">
+    <section class=" mb-5 mt-3 container ">
+        <table class="table border   hover " id="mytable"  >
             <thead>
                 <th>#</th>
                 <th>اسم الثابت</th>

@@ -1,6 +1,9 @@
 @extends('layouts.master')
  
 @section('content')
+
+ 
+
     <section class="container">
 
         @include('layouts._alert_session')
@@ -9,7 +12,8 @@
 
         <form action="{{ route('address.store') }}" method="post">
             @csrf
-            @include('address._addressForm')
+        
+            @include('AddressModule::address._addressForm')
             
             <div>
                 @include('layouts.2button')
@@ -19,6 +23,6 @@
 
     </section>
 
-    @include('address._addressTable')
+    @include('AddressModule::address._addressTable')
 
 @endsection

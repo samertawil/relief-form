@@ -1,13 +1,15 @@
 @font-face {
     font-family: 'Droid';
      
-    /* src:url(/public/assets/font/Droid.Arabic.Kufi_DownloadSoftware.iR_.ttf); */
         src:url(/font/Droid.Arabic.Kufi_DownloadSoftware.iR_.ttf);
+        
 }
 body {
     direction: rtl;
+    text-align: right !important;
     margin: 0;
     font-family: 'Droid','Courier New', Courier, monospace !important;
+    background-color:#f8f9fa;
   
 }
  

@@ -1,33 +1,38 @@
 <?php
 
-namespace App\Http\Controllers\address;
+namespace App\Modules\Address\Http\Controllers;
+ 
 
-use App\Models\area;
-use App\Models\city;
-use App\Models\region;
-
-use App\Models\street;
-use App\Models\address;
-use App\Models\location;
+ 
 use Illuminate\Http\Request;
-use App\Models\neighbourhood;
+
 use App\Http\Controllers\Controller;
+use App\Modules\Address\Models\area;
+use App\Modules\Address\Models\city;
+use Illuminate\Support\Facades\Auth;
 use App\Modules\Status\Models\status;
+use App\Modules\Address\Models\region;
+use App\Modules\Address\Models\street;
+use App\Modules\Address\Models\address;
+use App\Modules\Address\Models\location;
+use App\Modules\Address\Models\neighbourhood;
 
 class AddressController extends Controller
 {
   
     public function index()
     {
+      
         $addresses=address::with
         (['regionname','cityname','areaname','neighbourhoodname','streetname','nearestlocname','locname','addresstypename'])->latest()->get();
-        return view('address.index',['addresses'=>$addresses]);
+        return view('AddressModule::address.index',['addresses'=>$addresses]);
     }
 
  
     public function create()
     {
-     
+    
+
         $regions=region::get();
         $cities=city::get();
         $areas=area::get();
@@ -36,17 +41,23 @@ class AddressController extends Controller
         $nearlocs= status::select('id','status_name','p_id_sub')->wherein('p_id_sub',[2,5,])->get();
         $nearlocnames=location::get();
         $addresses=address::with
-        (['regionname','cityname','areaname','neighbourhoodname','streetname','nearestlocname','locname','addresstypename'])->latest()->take(1)->get();
+        (['regionname','cityname','areaname','neighbourhoodname','streetname','nearestlocname','locname','addresstypename'])->where('user_id',Auth::id())->latest()->get();
+       
         $address = new address();
        
-     return view('address.create',compact('regions','cities','areas','neighbourhoods','streets','nearlocs','nearlocnames','addresses','address'));
+     return view('AddressModule::address.create',compact('regions','cities','areas','neighbourhoods','streets','nearlocs','nearlocnames','addresses','address'));
     }
 
  
     public function store(Request $request)
     {
-        $request->validate(address::validate_rules(),address::validate_message());
-       address::create($request->all());
+       
+        $request->validate(address::validate_rules());
+
+      
+        $data=  array_merge($request->all(),['address_name'=>Auth::user()->idc,'user_id'=>Auth::id()]);
+       
+       address::create( $data);
        return redirect()->back()->with('message','تم الحفظ بنجاح')->with('type','success');
     }
 
@@ -70,14 +81,14 @@ class AddressController extends Controller
         $streets=street::get();
         $nearlocnames=location::get();
  
-        return view('address.edit',compact('address','nearlocs','regions','cities','areas','neighbourhoods','streets','nearlocnames'));
+        return view('AddressModule::address.edit',compact('address','nearlocs','regions','cities','areas','neighbourhoods','streets','nearlocnames'));
     }
 
  
     public function update(Request $request, $id)
     {
         $address=address::findorFail($id);
-        $request->validate(address::validate_rules(),address::validate_message());
+        $request->validate(address::validate_rules() );
         $address->update($request->all());
         return redirect()->back()->with('message','تم الحفظ بنجاح')->with('type','success');
     }
@@ -85,6 +96,8 @@ class AddressController extends Controller
  
     public function destroy($id)
     {
-        //
+        
+       $data = address::destroy($id);
+       return redirect()->back()->with('message','تم حذف العنوان بنجاح')->with('type','success');
     }
 }

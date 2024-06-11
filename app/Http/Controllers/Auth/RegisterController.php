@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\citizen;
+use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -23,50 +29,50 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+
+    
+    public function register(Request $request)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+
+         $request->validate(User::validate_rule(),User::validate_message());
+
+        $citizens = citizen::where('idc',  $request->idc)->first();
+
+        if (!($citizens && $citizens->birthday == $request->birthday)) {
+
+            return redirect()->back()->with('message', 'خطأ بالبيانات المدخلة')->with('type', 'danger');
+        }
+
+
+        $full_name = ($citizens->first_name . ' ' . $citizens->sec_name . ' ' . $citizens->thr_name . ' ' . $citizens->last_name);
+
+        $user=  User::create([
+            'idc' => $request->idc,
+            'mobile' => $request->mobile,
+            'user_name' => $request->idc,
+            'full_name' =>   $full_name ,
+            'email' => $request->idc,
+            'password' => Hash::make($request->password),
         ]);
+
+       
+        Auth::loginUsingId($user->id);
+
+        return redirect('/');
+
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
+
+    public function showRegistrationForm()
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        return view('layouts.register');
     }
 }

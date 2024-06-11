@@ -12,6 +12,12 @@ class setting_system extends Model
 
     protected $fillable=['system_name',	'description', 'active', 'status_id', 'date1'];
 
+    public static function validate_rules() {
+       return [
+        'system_name' => ['required','unique:setting_systems'],
+       ];
+    }
+
     // protected static function booted() {
 
     // }

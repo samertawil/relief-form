@@ -10469,8 +10469,8 @@
 			 * * `\_PAGE\_` - Current page number
 			 * * `\_PAGES\_` - Total number of pages of data in the table
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ _ENTRIES-TOTAL_",
-	
+			"sInfo":   "Showing _START_ to _END_ of _TOTAL_ _ENTRIES-TOTAL_",
+		 
 	
 			/**
 			 * Display information string for when the table is empty. Typically the

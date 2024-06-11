@@ -13,6 +13,7 @@ class SystemnameController extends Controller
 
     public function store(Request $request) {
 
+        $request->validate(setting_system::validate_rules());
         setting_system::create($request->all());
         return redirect()->back()->with('message','تم الحفظ بنجاح')->with('type','success');
     }

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    <meta name="google" content="notranslate">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.rtl.css') }}">
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
-
- 
+    <link rel="stylesheet" href="{{asset('css/main.css')}}">
 
  
 
     @yield('css-link')
     <title>{{ env('APP_NAME') }}</title>
-    <style>
+    {{-- <style>
         @font-face {
             font-family: 'Droid';
             src: url({{ asset('font/Droid.Arabic.Kufi_DownloadSoftware.iR_.ttf') }});
@@ -24,12 +24,12 @@
 
 
         body {
-            text-align: start !important;
+            text-align: right !important;
             font-family: 'Droid', 'Courier New', Courier, monospace !important;
             direction: rtl;
             background-color:#f8f9fa;
         }
-    </style>
+    </style> --}}
 @yield('css')
 
 </head>

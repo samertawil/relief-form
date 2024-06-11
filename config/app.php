@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+ 
 
 return [
 
@@ -82,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ar',
 
     /*
     |--------------------------------------------------------------------------
@@ -185,7 +186,10 @@ return [
         /*
          * Package Service Providers...
          */
-        App\Modules\Status\Providers\StatusServiceProvider::class,
+         App\Modules\Status\Providers\StatusServiceProvider::class,
+        App\Modules\Address\Providers\AddressServiceProvider::class,
+       
+      
 
         /*
          * Application Service Providers...
