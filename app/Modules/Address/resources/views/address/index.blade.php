@@ -1,7 +1,10 @@
-@extends('layouts.master')
+ 
+ 
 
-@section('content')
+    @include('AddressModule::address.create-contacts-info')
 
-@include('AddressModule::address._addressTable')
+      @include('AddressModule::address._address-table')  
 
-@endsection
+    
+ 
+ 

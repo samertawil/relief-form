@@ -16,11 +16,11 @@
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
-                        
+
                         <div class="card-header">تسجيل الدخول</div>
-                        @include('layouts._alert_session')
+                        @include('layouts._alert-session')
                         <div class="card-body">
-                            <form action="{{ route('login') }}"  method="POST" >
+                            <form action="{{ route('login') }}" method="POST">
                                 @csrf
 
                                 <div class="row mb-3">
@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
 
-                             
+
                                 <div class="d-flex justify-content-between">
                                     <div class="">
                                         <div class=" ">
@@ -69,7 +69,7 @@
 
                                 </div>
 
- 
+
                             </form>
                             <div class="dropdown-divider"></div>
 
@@ -80,11 +80,12 @@
                                 </div>
 
                                 <div style="margin-right: 10px;" id="change_id">
-                                    <a href="{{ route('change.password' , 800097818) }}"
+                                    <a href="javascript:;" id="btn1"
                                         class="btn btn-primary btn-sm">{{ __('mytrans.Forgot Your Password') }}</a>
+
                                 </div>
 
-                              
+
 
 
                             </div>
@@ -97,6 +98,19 @@
 
     <script src="{{ asset('js/bootstrap.js') }}"></script>
     <script src="{{ asset('js/jQuery.js') }}"></script>
+
+    <script>
+        $('#btn1').on('click', function() {
+            let d1 = $('#idc').val();
+            if (d1 === '')  {
+                alert('الرجاء ادخال رقم الهوية المطلوب تغير الباسورد');
+            } else {
+                window.location.href = "/change-password/" + d1;
+            }
+           
+                     
+        });
+    </script>
 
 </body>
 

@@ -15,6 +15,7 @@ return [
 
      'required' => 'حقل :attribute مطلوب',
      'unique' => 'الحقل :attribute مكرر لنفس القيمة المدخلة.',
+     'numeric' => 'الحقل :attribute يجب ان يكون ارقام.',
     'accepted' => 'The :attribute must be accepted.',
     'accepted_if' => 'The :attribute must be accepted when :other is :value.',
     'active_url' => 'The :attribute is not a valid URL.',
@@ -113,7 +114,7 @@ return [
     'multiple_of' => 'The :attribute must be a multiple of :value.',
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'The :attribute format is invalid.',
-    'numeric' => 'The :attribute must be a number.',
+    
     'password' => [
         'letters' => 'The :attribute must contain at least one letter.',
         'mixed' => 'The :attribute must contain at least one uppercase and one lowercase letter.',
@@ -188,7 +189,13 @@ return [
         'birthday'=>'تاريخ الميلاد ',
         'address_specific' =>'استكمال العنوان',
         'address_type' =>'طبيعة العنوان',
-
+        'area_id'=>'المنطقة',
+        'city_id'=>'المدينة',
+        'neighbourhood_id'=>'الحي',
+        'region_id'=>'المحافظة',
+        'current_address_status'=>'الحالة الحالية للسكن',
+        'mobile1'=>'الهاتف الخليوي',
+        'mobile2'=>'الهاتف الخليوي',
     ],
 
 ];

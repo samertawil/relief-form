@@ -16,16 +16,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+
 
     use RegistersUsers;
 
@@ -38,41 +29,43 @@ class RegisterController extends Controller
     }
 
 
-    
+
     public function register(Request $request)
     {
 
-         $request->validate(User::validate_rule(),User::validate_message());
 
         $citizens = citizen::where('idc',  $request->idc)->first();
 
         if (!($citizens && $citizens->birthday == $request->birthday)) {
 
-            return redirect()->back()->with('message', 'خطأ بالبيانات المدخلة')->with('type', 'danger');
-        }
+            $validator = Validator::make($request->all(), User::validate_rule(), User::validate_message());
 
+            $validator->errors()->add('birthday', 'تاريخ الميلاد غير صحيح');
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $full_name = ($citizens->first_name . ' ' . $citizens->sec_name . ' ' . $citizens->thr_name . ' ' . $citizens->last_name);
 
-        $user=  User::create([
+
+        $user =  User::create([
             'idc' => $request->idc,
             'mobile' => $request->mobile,
             'user_name' => $request->idc,
-            'full_name' =>   $full_name ,
+            'full_name' =>   $full_name,
             'email' => $request->idc,
             'password' => Hash::make($request->password),
         ]);
 
-       
+
         Auth::loginUsingId($user->id);
 
         return redirect('/');
-
     }
 
 
     public function showRegistrationForm()
     {
+
         return view('layouts.register');
     }
 }

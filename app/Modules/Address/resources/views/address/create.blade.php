@@ -1,28 +1,32 @@
 @extends('layouts.master')
- 
+
 @section('content')
-
- 
-
     <section class="container">
 
-        @include('layouts._alert_session')
+        @include('layouts._alert-session')
 
-        @include('layouts._error_form')
+        @include('layouts._error-form')
 
-        <form action="{{ route('address.store') }}" method="post">
+
+
+        <form action="{{ route('address.store', 8) }}" method="post">
             @csrf
-        
-            @include('AddressModule::address._addressForm')
-            
-            <div>
-                @include('layouts.2button')
-            </div>
+            @if ($profiles->current_address_status == 12)
+                @include('AddressModule::address._address-form', [
+                    'address_title' => 'عنوان مركز الايواء',
+                    'type' => 8,
+                    'typeName' => 'طبيعة المركز ',
+                    'locationName' => 'اسم مركز الايواء',
+                ])
+       @else
+            @include('AddressModule::address._address-form', [
+                'address_title' => 'عنوان النزوح',
+                'type' => 8,
+            ])
+
+@endif
 
         </form>
 
     </section>
-
-    @include('AddressModule::address._addressTable')
-
 @endsection

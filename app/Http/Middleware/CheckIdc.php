@@ -22,6 +22,7 @@ class CheckIdc
         $user = User::select('id', 'idc')->where('idc', $request->idc)->first();
 
         if (!$user) {
+            
             $validator->errors()->add('idc', 'لا يوجد حساب لرقم الهوية المدخل');
             return redirect()->back()->withErrors($validator)->withInput();
         }

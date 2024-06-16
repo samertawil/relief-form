@@ -14,17 +14,15 @@
                     <div class="dropdown nav-item ">
                         <button class="btn  dropdown-toggle  nav-link" type="button" id="address_menu"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            العناوين 
+                            بياناتي 
                         </button>
                         <div class="dropdown-menu" aria-labelledby="address_menu">
-                            <a class="dropdown-item" href="{{ route('address.index') }}">قائمة العناوين</a>
-                            <a class="dropdown-item" href="{{ route('address.create') }}"> اضافة عنوان جديد</a>
-                            {{-- <div class="dropdown-divider"></div>
-                            <a class="dropdown-item " href="{{ route('status.create') }}">ثوابت النظام</a> --}}
+                            <a class="dropdown-item" href="{{ route('address.index') }}">عرض البيانات</a>
+                    
 
                         </div>
                     </div>
-                    <li class="nav-item px-2"><a href="#" class="nav-link">رؤيتنا</a></li>
+                    <li class="nav-item px-2"><a href="#" class="nav-link">حول الاغاثة</a></li>
                     <li class="nav-item px-2"><a href="{{route('contact-us')}}" class="nav-link">اتصل بنا</a></li>
                   
                     {{-- <li class="nav-item mx-lg-5 " id="login-span"><a href="{{ route('login') }}"

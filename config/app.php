@@ -186,8 +186,9 @@ return [
         /*
          * Package Service Providers...
          */
-         App\Modules\Status\Providers\StatusServiceProvider::class,
+
         App\Modules\Address\Providers\AddressServiceProvider::class,
+        App\Modules\Status\Providers\StatusServiceProvider::class,
        
       
 

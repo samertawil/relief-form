@@ -15,21 +15,7 @@
 
     @yield('css-link')
     <title>{{ env('APP_NAME') }}</title>
-    {{-- <style>
-        @font-face {
-            font-family: 'Droid';
-            src: url({{ asset('font/Droid.Arabic.Kufi_DownloadSoftware.iR_.ttf') }});
 
-        }
-
-
-        body {
-            text-align: right !important;
-            font-family: 'Droid', 'Courier New', Courier, monospace !important;
-            direction: rtl;
-            background-color:#f8f9fa;
-        }
-    </style> --}}
 @yield('css')
 
 </head>

@@ -9,6 +9,7 @@ use App\Modules\Address\Models\address;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Validator;
 
 class User extends Authenticatable
 {
@@ -83,14 +84,13 @@ public static function validate_message()
          'mobile.unique' =>'رقم الهاتف الخليوي مدخل مسبقا',
          'idc.min_digits' => 'عدد ارقم الهوية غير صحيح',
          'idc.max_digits' => 'عدد ارقم الهوية غير صحيح',
-        //  'min' => 'عدد الحروف المدخلة غير كافي',
-        //  'max' => 'عدد الحروف المدخلة اكبر من المطلوب',
-         'confirmed' =>'يرجى تاكيد كلمة المرور بشكل صحيح',
+          'confirmed' =>'يرجى تاكيد كلمة المرور بشكل صحيح',
         
     ];
 
 
 }
+
 
     public function UserAddress() {
         return $this->hasone(address::class,'user_id','id');

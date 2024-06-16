@@ -8,7 +8,6 @@
                 <tr>
                     <th>#</th>
                     <th>طبيعة العنوان</th>
-                    {{-- <th>اسم الاختصار</th> --}}
                     <th>المحافظة</th>
                     <th>المدينة</th>
                     <th>المنطقة</th>
@@ -22,11 +21,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($addresses as $key=> $address)
+                {{-- @foreach ($addresses->whereIn('address_type',...$type) as $key=> $address) --}}
+                @foreach ($addresses  as $key=> $address)
                     <tr>
                         <td>{{$key+1 }}</td>
                         <td>{{ $address->addresstypename->status_name ?? '' }}</td>
-                        {{-- <td>{{ $address->address_name }}</td> --}}
                         <td>{{ $address->regionname->region_name }}</td>
                         <td>{{ $address->cityname->city_name }}</td>
                         <td>{{ $address->areaname->area_name }}</td>
@@ -39,7 +38,7 @@
                         <td class="d-flex align-items-center justify-content-between">
                             <button class="d-inline btn  btn-lg   " title="edit">
                                 <a class="d-inline " href="{{ route('address.edit', $address->id) }}">
-                                    <i class="fas fa-edit" style="font-size: 22px;"></i></a>
+                                    <i class="fas fa-edit" style="font-size: 22px; color:green;"></i></a>
                             </button>
                             <form action="{{route('address.destroy',$address->id)}}" method="post">
                                 <button type="submit" class="btn btn-lg" onclick="alert('هل انت متاكد من الحذف ؟')"><i
