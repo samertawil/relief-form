@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\CheckAddress;
 use Illuminate\Support\Facades\Route;
+use App\Modules\Address\Http\Controllers\CitzenController;
 use App\Modules\Address\Http\Controllers\AddressController;
  
 
@@ -19,6 +20,7 @@ Route:: middleware(['web','auth'])->group(function() {
  Route::get('/address/edit/{id}',[AddressController::class,'edit'])->name('address.edit');
  Route::put('/address/update/{id}',[AddressController::class,'update'])->name('address.update');
  Route::delete('/address/destroy/{id}',[AddressController::class,'destroy'])->name('address.destroy');
+ Route::post('/ctzn-profile/address-status',[CitzenController::class,'store'])->middleware('auth')->name('CitzenProfile.address_status.store');
 
 
 });

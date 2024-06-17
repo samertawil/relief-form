@@ -4,7 +4,7 @@ namespace App\Modules\Address\Models;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\CitzenProfile;
+use App\Modules\Address\Models\CitzenProfile;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use App\Modules\Status\Models\status;

@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Models;
+ 
+namespace App\Modules\Address\Models;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

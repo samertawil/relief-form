@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\CitzenProfile;
+use App\Modules\Address\Models\CitzenProfile;
 use Illuminate\Support\Facades\Auth;
+
 
 class checkContactsInfo
 {

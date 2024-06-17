@@ -7,7 +7,7 @@ namespace App\Modules\Address\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use App\Models\CitzenProfile;
+ 
 use App\Modules\Address\Models\area;
 use App\Modules\Address\Models\city;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +16,9 @@ use App\Modules\Address\Models\region;
 use App\Modules\Address\Models\street;
 use App\Modules\Address\Models\address;
 use App\Modules\Address\Models\location;
-use App\Modules\Address\Models\neighbourhood;
 use Illuminate\Support\Facades\Validator;
+use App\Modules\Address\Models\CitzenProfile;
+use App\Modules\Address\Models\neighbourhood;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class AddressController extends Controller

@@ -4,11 +4,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\status\StatusController;
-use App\Http\Controllers\address\AddressController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\status\StatusController;
 use App\Http\Controllers\ChangePasswordController;
-use App\Http\Controllers\CitzenController;
+use App\Http\Controllers\address\AddressController;
+ 
+use App\Modules\Address\Http\Controllers\CitzenController;
 use App\Http\Controllers\settingcontrollers\SystemnameController;
 
 
@@ -32,4 +33,3 @@ Route::get('/change-password/{idc}', [ChangePasswordController::class, 'create']
 Route::post('/change-password-submit', [ChangePasswordController::class, 'store'])->name('change.password.submit')->middleware('guest', 'CheckIdc', 'CheckUserUpdatePassword');
 
 
-Route::post('/ctzn-profile/address-status',[CitzenController::class,'store'])->middleware('auth')->name('CitzenProfile.address_status.store');

@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Modules\Address\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\CitzenProfile;
+use App\Http\Controllers\Controller;
+use App\Modules\Address\Models\CitzenProfile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+
 
 class CitzenController extends Controller
 {

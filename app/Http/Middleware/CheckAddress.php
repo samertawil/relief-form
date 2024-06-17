@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\CitzenProfile;
+use App\Modules\Address\Models\CitzenProfile;
 use Closure;
 use App\Models\User;
 use Illuminate\Http\Request;
