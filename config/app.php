@@ -189,8 +189,9 @@ return [
 
         App\Modules\Address\Providers\AddressServiceProvider::class,
         App\Modules\Status\Providers\StatusServiceProvider::class,
+        App\Modules\Damage\Providers\DamageServiceProvider::class,
        
-      
+     
 
         /*
          * Application Service Providers...

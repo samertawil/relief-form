@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('damage_masters', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('citzen_profiles', function (Blueprint $table) {
+            $table->foreignId('created_by')->nullable()->constrained('users');
+            $table->timestamp('last_active_at')->nullable();
         });
     }
 
@@ -26,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('damage_masters');
+        Schema::table('citzen_profiles', function (Blueprint $table) {
+            $table->dropColumn('created_by');
+            $table->dropColumn('last_active_at');
+        });
     }
 };

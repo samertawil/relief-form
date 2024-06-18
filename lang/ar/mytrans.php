@@ -15,4 +15,6 @@ return [
         'address_specific' =>'استكمال العنوان',
         'address specific' =>'استكمال العنوان',
         'address type' =>'طبيعة العنوان',
+        'damage_type'=>'نوع الضرر',
+        'created_at'=>'تاريخ الاضافة',
   ];

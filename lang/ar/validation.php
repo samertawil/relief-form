@@ -196,6 +196,7 @@ return [
         'current_address_status'=>'الحالة الحالية للسكن',
         'mobile1'=>'الهاتف الخليوي',
         'mobile2'=>'الهاتف الخليوي',
+        'damage_type'=>'نوع الضرر',
     ],
 
 ];

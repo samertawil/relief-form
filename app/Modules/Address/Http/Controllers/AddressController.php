@@ -36,7 +36,7 @@ class AddressController extends Controller
             ->with('mobile', $contactData['mobile'])
             ->with('profiles', $contactData['profiles'])
             ->with('addresses' , $addresses);
-        // return view('AddressModule::address.index', ['addresses' => $addresses]);
+ 
     }
 
 
