@@ -28,9 +28,11 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+public function register() {
+    return view('layouts.register');
+}
 
-
-    public function register(Request $request)
+    public function register_store(Request $request)
     {
 
 
@@ -43,7 +45,7 @@ class RegisterController extends Controller
             $validator->errors()->add('birthday', 'تاريخ الميلاد غير صحيح');
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
+        $validator = Validator::make($request->all(), User::validate_rule(), User::validate_message())->validate();
         $full_name = ($citizens->first_name . ' ' . $citizens->sec_name . ' ' . $citizens->thr_name . ' ' . $citizens->last_name);
 
 

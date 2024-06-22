@@ -3,6 +3,7 @@
  
 namespace App\Modules\Address\Models;
 
+use App\Models\citizen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
@@ -36,6 +37,15 @@ class CitzenProfile extends Model
             unset($rules['mobile1']);
         }
         return $rules;
+    }
+
+    public static function profile() {
+        $profile = CitzenProfile::where('user_id', Auth::id())->first();
+        return  $profile;
+    }
+
+    public function citizen() {
+        return $this->hasOne(citizen::class,'id','citizen_id');
     }
 }
 

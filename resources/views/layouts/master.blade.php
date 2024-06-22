@@ -43,8 +43,8 @@
                   {{-- @include('layouts.breadcrumb') --}}
                   
                 </div>
-              </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
+              </div>
+            </div>
           </div>
 
         <div >
@@ -54,17 +54,7 @@
         </div>
 
 
-
-        <div>
-            {{-- @include('web-site-public.footer') --}}
-        </div>
-
-
     </div>
-
-
-
-
 
 
    <script src="{{ asset('js/jquery.min.js') }}"></script>

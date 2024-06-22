@@ -6,8 +6,9 @@ namespace App\Modules\Address\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Validation\Rule;
+
 use App\Http\Controllers\Controller;
- 
 use App\Modules\Address\Models\area;
 use App\Modules\Address\Models\city;
 use Illuminate\Support\Facades\Auth;
@@ -26,17 +27,16 @@ class AddressController extends Controller
 
     public function index()
     {
- 
+
         $addresses = address::with(['regionname', 'cityname', 'areaname', 'neighbourhoodname', 'streetname', 'nearestlocname', 'locname', 'addresstypename'])->latest()->get();
-        
+
         $contactData = address::contacts_data();
 
         return view('AddressModule::address.index')
             ->with('nearlocs', $contactData['nearlocs'])
             ->with('mobile', $contactData['mobile'])
             ->with('profiles', $contactData['profiles'])
-            ->with('addresses' , $addresses);
- 
+            ->with('addresses', $addresses);
     }
 
 
@@ -104,21 +104,21 @@ class AddressController extends Controller
 
     public function store(Request $request, $address_type)
     {
-
+        $data =  array_merge($request->all(), ['address_name' => Auth::user()->idc, 'user_id' => Auth::id(), 'address_type' => $address_type]);
 
         $profile = address::contacts_data();
 
-        $validator = Validator::make($request->all(), address::validate_rules());
+        $validator = Validator::make($data , address::validate_rules($data));
 
         if ($address_type == 8 &&  $profile['profiles']['current_address_status'] == 13 &&  (empty($request->home_type))) {
 
             $validator->errors()->add('home_type', 'الرجاء ادخال الحقل');
             return redirect()->back()->withErrors($validator)->withInput();
         }
- 
+
         $validator->validate();
 
-        $data =  array_merge($request->all(), ['address_name' => Auth::user()->idc, 'user_id' => Auth::id(), 'address_type' => $address_type]);
+      
 
         address::create($data);
         return redirect()->back()->with('message', 'تم الحفظ بنجاح')->with('type', 'success');
@@ -152,7 +152,7 @@ class AddressController extends Controller
     public function update(Request $request, $id)
     {
         $address = address::findorFail($id);
-        $request->validate(address::validate_rules());
+        $request->validate(address::validate_rules($request));
         $address->update($request->all());
         return redirect()->back()->with('message', 'تم الحفظ بنجاح')->with('type', 'success');
     }

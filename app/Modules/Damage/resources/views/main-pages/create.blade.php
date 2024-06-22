@@ -47,21 +47,62 @@
                 </form>
             </div>
             <section>
-                <div class="container">
-                    <table class="table  my-4">
+                <div>
+                    <table class="table border container my-4">
                         <thead>
                             <th>#</th>
                             <th>{{ __('mytrans.damage_type') }}</th>
                             <th>{{ __('mytrans.created_at') }}</th>
+                            <th>{{ __('mytrans.damage_specific') }}</th>
+                            <th class="text-center">{{ __('mytrans.table_operations') }}</th>
 
                         </thead>
                         <tbody>
 
                             @foreach ($damagesAll as $key => $damage)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $damage->status->status_name }}</td>
-                                    <td>{{ $damage->created_at->format('d/m/Y') }}</td>
+                                <form action="{{ route('damages.detail.store', $damage->id) }}" method="post">
+                                    @csrf
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $damage->statusName->status_name }}</td>
+                                        <td>{{ $damage->created_at->format('d/m/Y') }}</td>
+                                        <td>
+
+                                            <select name="damage_specific"
+                                                class="form-select @error('damage_specific') is-invalid
+                                                
+                                            @enderror">
+                                                @if ($damage->damage_type == 21)
+                                                    @foreach (config('damagmodule')['hummanDamageTypes'] as $key => $damageSpecific)
+                                                        <option id="d2" value="{{ $damageSpecific }}">
+                                                            {{ $key }}</option>
+                                                    @endforeach
+                                                @elseif ($damage->damage_type == 22)
+                                                    @foreach (config('damagmodule')['economyDamageTypes'] as $key => $damageSpecific)
+                                                        <option value="{{ $damageSpecific }}">{{ $key }}</option>
+                                                    @endforeach
+                                                @endif
+
+                                            </select>
+                                        </td>
+
+
+                                        <td class="d-flex align-items-center justify-content-between">
+
+
+                                            <button type="submit" id="d1"
+                                                class="btn btn-info">{{ __('mytrans.add_new') }}</button>
+                                </form>
+
+                                <form action="#" method="post">
+                                    <button type="submit"
+                                        class="btn btn-danger">{{ __('mytrans.delete_record') }}</button>
+
+                                    @csrf
+                                    @method('delete')
+                                </form>
+
+                                </td>
                                 </tr>
                             @endforeach
 
@@ -72,9 +113,6 @@
         </div>
 
 
-  
-
-
 
         </div>
 
@@ -83,10 +121,50 @@
     </section>
 
 
+    <div class="container">
+        <table class="table hover border container" id="mytable">
+            <thead>
+                <tr>
+                    <th>{{ __('mytrans.file_num') }}</th>
+                    <th>{{ __('mytrans.damage_type') }}</th>
+                    <th>{{ __('mytrans.damage_specific') }}</th>
+                    <th>{{ __('mytrans.created_at') }}</th>
+                    <th>{{ __('mytrans.table_operations') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($alldata as $data)
+                    <tr>
+
+                        <td>{{ $data->id }}</td>
+                        <td>{{ $data->damageMaster->statusName->status_name }}</td>
+                        <td>{{ $data->statusName->status_name }}</td>
+                        <td>{{ $data->created_at->format('d/m/Y') }}</td>
+                        <td class="d-flex">
+
+                            <form>
+                                <button class="btn btn-md btn-primary mx-3">تقديم استثمارة</button>
+                            </form>
+
+                            <form action="#" method="post">
+                                <button type="submit" class="btn btn-danger">{{ __('mytrans.delete_record') }}</button>
+
+                                @csrf
+                                @method('delete')
+                            </form>
+                        </td>
+
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
 
     <script src="{{ asset('js/jQuery.js') }}"></script>
     <script src="{{ asset('js/all.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
 
-    @include('layouts._datatable')
+    {{-- @include('layouts._datatable') --}}
+    
 @endsection

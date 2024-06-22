@@ -13,8 +13,11 @@ class CheckUserUpdatePassword
 
     public function handle(Request $request, Closure $next)
     {
-        $validator = Validator::make($request->all(), [
-            // 'idc'=>'required',
+     
+
+        $validator=Validator::make($request->only('answer_q1','answer_q2'),[
+            'answer_q1'=>'required',
+            'answer_q2'=> 'required',
         ]);
 
         $answers = citizen::select('answer_q1', 'answer_q2')->where('idc', $request->idc)->first();
@@ -22,7 +25,8 @@ class CheckUserUpdatePassword
         if (!empty($answers)) {
 
             if (!($answers->answer_q1 == $request->answer_q1 && $answers->answer_q2 == $request->answer_q2)) {
-
+               
+       
                 $validator->errors()->add('idc', 'خطأ باجابة الاسئلة ');
                 return redirect()->back()->withErrors($validator)->withInput();
             }

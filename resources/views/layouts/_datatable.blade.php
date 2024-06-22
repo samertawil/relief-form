@@ -11,9 +11,12 @@
  
     let table = new DataTable('#mytable', {
         order: [ 'desc'],
+        "bProcessing": true,
+        "sAutoWidth": false,
+    "bDestroy":true,
+           
         
 });
 </script>
 
 @endsection
- 

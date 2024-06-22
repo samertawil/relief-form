@@ -12,4 +12,9 @@ return [
  'register_new_account'=>'Register',
  'Forgot Your Password' =>'Forgot Your Password',
  'address specific' =>'Full address',
+ 'table_operations'=>'operations',
+ 'damage_specific'=>'specify the damage',
+ 'add_new'=>'add new',
+ 'delete_record'=>'delete record',
+ 'file_num'=>'file number',
 ];

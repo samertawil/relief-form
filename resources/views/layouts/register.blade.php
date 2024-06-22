@@ -152,7 +152,7 @@
 
 
                                 <div class="row mb-0 ">
-                                    <div class="col-md-6 offset-md-4">
+                                    <div class="col-md-6 offset-md-4 text-end">
                                         <button type="submit" class="btn btn-primary">
                                             تسجيل
                                         </button>
@@ -175,11 +175,11 @@
 
             // var btn1 = $('#btn1').on('click', function() {
                 var idc = $('#idc').val();
-
+                var route="{{route('api.idc.questions')}}";
                 $.ajax({
 
                     type: 'get',
-                    url: 'http://localhost:8000/api/apiq/' + idc,
+                    url: route+'/' + idc,
                     success: function(res) {
 
                         $('#q1_p').html('');

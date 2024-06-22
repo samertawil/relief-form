@@ -8,14 +8,15 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\status\StatusController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\address\AddressController;
- 
+use App\Http\Controllers\Auth\LoginController;
 use App\Modules\Address\Http\Controllers\CitzenController;
 use App\Http\Controllers\settingcontrollers\SystemnameController;
 
 
 Auth::routes();
-
-Route::post('/register',[RegisterController::class,'register'])->name('register')->middleware('CheckUserUpdatePassword');
+// Route::get('/login',[LoginController::class,'showLoginForm'])->name('login')->middleware('guest');
+// Route::get('/register',[RegisterController::class,'register'])->name('register')->middleware('guest');
+Route::post('/register',[RegisterController::class,'register_store'])->name('register.store')->middleware('CheckUserUpdatePassword');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -33,3 +34,4 @@ Route::get('/change-password/{idc}', [ChangePasswordController::class, 'create']
 Route::post('/change-password-submit', [ChangePasswordController::class, 'store'])->name('change.password.submit')->middleware('guest', 'CheckIdc', 'CheckUserUpdatePassword');
 
 
+ 

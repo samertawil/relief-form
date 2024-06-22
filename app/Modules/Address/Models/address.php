@@ -24,7 +24,7 @@ class address extends Model
     ];
 
 
-    public static function validate_rules()
+    public static function validate_rules($request)
     {
 
         return [
@@ -34,14 +34,15 @@ class address extends Model
             'area_id' => ['required'],
             'neighbourhood_id' => ['required'],
             'address_specific' => ['required'],
-            'address_type' => [
-                Rule::unique('addresses')->where(function ($query) {
+            'address_type' => [ 
+                Rule::unique('addresses')->where(function ($query)  {
                     return $query->where('user_id', Auth::id());
                 }),
             ],
-
+          
         ];
     }
+ 
 
     public static function validate_message()
     {

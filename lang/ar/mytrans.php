@@ -17,4 +17,9 @@ return [
         'address type' =>'طبيعة العنوان',
         'damage_type'=>'نوع الضرر',
         'created_at'=>'تاريخ الاضافة',
+        'table_operations'=>'الاجراءات',
+        'damage_specific'=>' طبيعة الضرر',
+        'add_new'=>'إضافة',
+        'delete_record'=>'حذف',
+        'file_num'=>'رقم الملف',
   ];
