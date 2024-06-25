@@ -4,11 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\CheckAddress;
 use Illuminate\Support\Facades\Route;
-use App\Modules\Address\Http\Controllers\CitzenController;
+ 
 use App\Modules\Address\Http\Controllers\AddressController;
- 
+use App\Modules\Address\Http\Controllers\ApiController;
+use App\Modules\Address\Http\Controllers\citizenController;
 
- 
 Route:: middleware(['web','auth'])->group(function() {
 
 
@@ -20,9 +20,9 @@ Route:: middleware(['web','auth'])->group(function() {
  Route::get('/address/edit/{id}',[AddressController::class,'edit'])->name('address.edit');
  Route::put('/address/update/{id}',[AddressController::class,'update'])->name('address.update');
  Route::delete('/address/destroy/{id}',[AddressController::class,'destroy'])->name('address.destroy');
- Route::post('/ctzn-profile/address-status',[CitzenController::class,'store'])->name('CitzenProfile.address_status.store');
+ Route::post('/ctzn-profile/address-status',[citizenController::class,'store'])->name('citizenProfile.address_status.store');
 
 
 });
 
- 
+ Route::get('/api/test1/{value?}/{model?}',[ApiController::class,'api_test1'])->name('api.address');

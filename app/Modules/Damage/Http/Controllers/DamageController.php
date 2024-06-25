@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Modules\Damage\Models\DamageDetail;
 use App\Modules\Damage\Models\DamageMaster;
-use App\Modules\Address\Models\CitzenProfile;
+use App\Modules\Address\Models\citizenProfile;
 
 class DamageController extends Controller
 {
@@ -28,7 +28,7 @@ class DamageController extends Controller
   public function store(Request $request)
   {
 
-    $profile = CitzenProfile::profile();
+    $profile = citizenProfile::profile();
  
     $request->validate(DamageMaster::validate_rule());
 

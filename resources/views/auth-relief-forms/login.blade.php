@@ -7,27 +7,47 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.rtl.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    {{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://drive.google.com/uc?export=view&id=1yTLwNiCZhIdCWolQldwq4spHQkgZDqkG"> --}}
     <title>تسجيل الدخول</title>
 </head>
+{{-- w-md-50 --}}
 
 <body>
-    <div class="d-flex " style="height: 500px;">
-        <div class="container  m-auto w-50">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
 
-                        <div class="card-header">تسجيل الدخول</div>
+
+    <div class="d-flex" style="height: 600px; ">
+
+        <div class="container  m-auto px-5  ">
+
+            <div>
+
+                <div class=" fw-bolder h4 text-dark d-flex justify-content-center align-items-center">
+
+                    <strong class="mx-2">الخدمات الالكترونية الموحدة</strong>
+    
+                    <div class="mx-2"  style="width: 90px; height: 100px;">
+                        <img src="{{ asset('assets/media/pal.png') }}" alt="palestine" style="width: 100%; height: 100%;">
+                    </div>
+                    
+                </div>
+            </div>
+           
+
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card ">
+
+                        <div class="card-header ">تسجيل الدخول</div>
                         @include('layouts._alert-session')
                         <div class="card-body">
                             <form action="{{ route('login') }}" method="POST">
                                 @csrf
 
-                                <div class="row mb-3">
-                                    <label for="idc"
-                                        class="col-md-4 col-form-label text-md-end">{{ __('mytrans.idc') }}</label>
+                                <div class=" mb-3">
+                                    <label for="idc" class="  col-form-label ">{{ __('mytrans.idc') }}</label>
 
-                                    <div class="col-md-6">
+                                    <div class=" ">
                                         <input id="idc" type="text"
                                             class="form-control @error('idc') is-invalid @enderror" name="idc"
                                             value="{{ old('idc') }}" required autocomplete="idc" autofocus>
@@ -40,11 +60,10 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
-                                    <label for="password"
-                                        class="col-md-4 col-form-label text-md-end">{{ __('mytrans.password') }}</label>
+                                <div class=" mb-3">
+                                    <label for="password" class="  col-form-label">{{ __('mytrans.password') }}</label>
 
-                                    <div class="col-md-6">
+                                    <div class=" ">
                                         <input id="password" type="password"
                                             class="form-control @error('password') is-invalid @enderror" name="password"
                                             required autocomplete="current-password">
@@ -58,59 +77,33 @@
                                 </div>
 
 
-                                <div class="d-flex justify-content-between">
-                                    <div class="">
-                                        <div class=" ">
-                                            <button type="submit" class="btn btn-success">
-                                                {{ __('mytrans.Login') }}
-                                            </button>
-                                        </div>
-                                    </div>
+                                <div class="d-grid gap-2">
 
+                                    <button type="submit" class="  btn btn-primary btn-block my-5">
+                                        {{ __('mytrans.Login') }}
+                                    </button>
                                 </div>
-
-
                             </form>
-                            <div class="dropdown-divider"></div>
+                        
 
-                            <div class="d-lg-flex  justify-content-center">
-                                <div class="my-3 my-lg-0">
-                                    <a href="{{ route('register') }}"
-                                        class="btn btn-primary btn-sm">{{ __('mytrans.register_new_account') }}</a>
+                            <div class="d-md-flex justify-content-between">
+                                <div class="mb-4" id="change_id">
+                                    <a href="{{route('change.password.form')}}" id="btn1"
+                                        class="text-decoration-none ">{{ __('mytrans.Forgot Your Password') }} ؟ </a>
                                 </div>
-
-                                <div style="margin-right: 10px;" id="change_id">
-                                    <a href="javascript:;" id="btn1"
-                                        class="btn btn-primary btn-sm">{{ __('mytrans.Forgot Your Password') }}</a>
-
-                                </div>
-
-
-
-
+                                <a href="{{ route('register.create') }}"
+                                    class="text-decoration-none">{{ __('mytrans.register_new_account') }}</a>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+   
     <script src="{{ asset('js/bootstrap.js') }}"></script>
     <script src="{{ asset('js/jQuery.js') }}"></script>
-
-    <script>
-        $('#btn1').on('click', function() {
-            let d1 = $('#idc').val();
-            if (d1 === '')  {
-                alert('الرجاء ادخال رقم الهوية المطلوب تغير الباسورد');
-            } else {
-                window.location.href = "/change-password/" + d1;
-            }
-           
-                     
-        });
-    </script>
 
 </body>
 

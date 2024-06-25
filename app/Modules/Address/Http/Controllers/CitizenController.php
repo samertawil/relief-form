@@ -5,25 +5,23 @@ namespace App\Modules\Address\Http\Controllers;
 use App\Models\citizen;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CitzenRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Modules\Address\Models\CitzenProfile;
+use App\Modules\Address\Models\citizenProfile;
 
 
-class CitzenController extends Controller
+class citizenController extends Controller
 {
 
 
-    public function store(Request $request)
+    public function store(CitzenRequest $request)
     {
-
-   
 
        $citizenIdc=citizen::current_user_citizen_id( $request->user()->idc);
 
-       $validator = Validator::make($request->all(), CitzenProfile::validate_rules($request))->validate();
-
-        CitzenProfile::upsert([
+ 
+        citizenProfile::upsert([
             [
                 'user_id' => Auth::id(),
                 'current_address_status' => $request->current_address_status,

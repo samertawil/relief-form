@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('status_id')->nullable()->constrained('statuses');
             $table->unique(['master_id','damage_specific']);
             $table->enum('active',[0,1])->default(1);
-            $table->foreignId('created_by')->nullable()->constrained('citzen_profiles'); 
+            $table->foreignId('created_by')->nullable()->constrained('citizen_profiles'); 
             $table->json('attachments')->nullable();
             $table->softDeletes();
             $table->timestamps();

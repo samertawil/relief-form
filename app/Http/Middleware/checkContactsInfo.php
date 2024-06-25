@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use App\Modules\Address\Models\citizenProfile;
 use Closure;
 use Illuminate\Http\Request;
-use App\Modules\Address\Models\CitzenProfile;
+ 
 use Illuminate\Support\Facades\Auth;
 
 
@@ -14,9 +14,10 @@ class checkContactsInfo
     public function handle(Request $request, Closure $next)
     {
         
-        $CitzenProfile = CitzenProfile::select('id')->where('user_id', Auth::id())->first();
+       
+         $citizenProfile =citizenProfile::select('id')->where('user_id', Auth::id())->first();
 
-        if (!$CitzenProfile) {
+        if (!$citizenProfile) {
           
             return redirect()->route('address.create.contacts.info');
         }

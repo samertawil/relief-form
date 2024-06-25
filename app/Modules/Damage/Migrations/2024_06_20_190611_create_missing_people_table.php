@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('missing_people', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('created_by')->constrained('citzen_profiles'); // تم تعبئة الاستبانة بواسطة صاحب البروفايل
+            $table->foreignId('created_by')->constrained('citizen_profiles'); // تم تعبئة الاستبانة بواسطة صاحب البروفايل
             $table->date('strike_date'); // تاريخ استهداف المبنى
             $table->string('building_name');
             $table->unsignedInteger('floor');

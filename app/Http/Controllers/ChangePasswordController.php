@@ -9,35 +9,46 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\ChangePasswordChkIdcRequest;
 
 class ChangePasswordController extends Controller
 {
 
+  public function change_password_form() {
 
-
-  public function create($idc)
-  {
-
-    $questions = citizen::select('q1', 'q2')->where('idc', $idc)->first();
-
-    return  view('layouts.change-password', ['questions' => $questions]);
+    return view('auth-relief-forms.change-password-create');
+        
   }
 
-  public function store(Request $request)
+  public function create(ChangePasswordChkIdcRequest $request)
+  {
+    
+    $citizen = citizen::where('idc', $request->idc)->first();
+
+    return view('auth-relief-forms.change-password', compact('citizen'));
+
+  }
+
+  public function store(ChangePasswordRequest $request, $idc)
   {
 
-    $citizens = citizen::where('idc',  $request->idc)->first();
+    $citizen = citizen::where('idc',  $idc)->first();
 
-    if (!($citizens && $citizens->birthday == $request->birthday)) {
+    $validator = Validator::make($request->all(), []);
 
-      $validator = Validator::make($request->all(), User::forget_password_validate_rule(), User::validate_message());
+    if (!( $citizen->birthday == $request->birthday)) {
 
       $validator->errors()->add('birthday', 'تاريخ الميلاد غير صحيح');
       return redirect()->back()->withErrors($validator)->withInput();
     }
+    if (!($citizen->answer_q1 == $request->answer_q1 && $citizen->answer_q2 == $request->answer_q2)) {
+     
+      $validator->errors()->add('idc', ' خطأ بإجابة الاسئلة ');
+      return redirect()->back()->withErrors($validator)->withInput();
+  }
 
-
-    $user = User::select('id', 'idc', 'full_name')->where('idc', $request->idc)->first();
+    $user = User::select('id', 'idc', 'full_name')->where('idc',$idc)->first();
 
     $user->update([
       
@@ -57,7 +68,11 @@ class ChangePasswordController extends Controller
     if ($questions->isEmpty()) {
       return Response::json(array('q1' => 'خطأ برقم الهوية', 'q2' => 'خطأ برقم الهوية'), 200);
     }
-    // return Response::json(array('q1' => $questions[0]['q1'], 'q2' =>$questions[0]['q2']), 200);
+  
     return response($questions, 200);
   }
+
+
+
+
 }

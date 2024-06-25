@@ -25,9 +25,8 @@
                         <div class="card-header">تسجيل حساب جديد</div>
 
                         <div class="card-body">
-                            <form method="POST" action="{{ route('register') }}">
+                            <form method="POST" action="{{ route('register.store',$citizen->idc) }}">
                                 @csrf
-
 
                                 <div class="row mb-3">
                                     <label for="idc"
@@ -36,7 +35,7 @@
                                     <div class="col-md-6">
                                         <input id="idc" type="number"
                                             class="form-control @error('idc') is-invalid @enderror" name="idc"
-                                            value="{{ old('idc') }}" autocomplete="idc" autofocus onchange="GetQuestions()">
+                                            value="{{ old('idc',$citizen->idc) }}" autocomplete="idc" disabled >
 
                                         @error('idc')
                                             <span class="invalid-feedback" role="alert">
@@ -45,9 +44,7 @@
                                         @enderror
                                     </div>
 
-                                    {{-- <div class="col-md-1">
-                                        <button class="btn btn-info btn-sm" type="button" id="btn1">استمر</button>
-                                    </div> --}}
+                                 
 
                                 </div>
 
@@ -92,15 +89,19 @@
 
                                     <div class="col-md-3">
                                         <p id="q1_p" type="text" class="form-control border-0">
-
+                                                {{$citizen->q1}}؟
                                         </p>
 
                                     </div>
 
                                     <div class="col-md-3">
-                                        <input name="answer_q1" class="form-control">
+                                        <input name="answer_q1" type="text" value="{{old('answer_q1')}}"   @class([
+                                           'form-control',
+                                           'is-invalid' =>$errors->has('answer_q1')
+                                        ]) >
+                                          @include('layouts._show-error',['field_name'=>'answer_q1'])
                                     </div>
-
+                                  
                                 </div>
 
                                 <div class="row mb-3">
@@ -110,13 +111,17 @@
 
                                     <div class="col-md-3">
                                         <p id="q2_p" type="text" class="form-control border-0">
-                                            {{-- {{ $questions->q2 }} --}}
+                                         {{  $citizen->q2  }}؟
                                         </p>
 
                                     </div>
 
                                     <div class="col-md-3">
-                                        <input name="answer_q2" class="form-control">
+                                        <input name="answer_q2" value="{{old('answer_q2')}}"   @class([
+                                            'form-control',
+                                            'is-invalid' =>$errors->has('answer_q2')
+                                         ]) >
+                                           @include('layouts._show-error',['field_name'=>'answer_q2'])
                                     </div>
 
                                 </div>
@@ -170,10 +175,9 @@
     <script src="{{ asset('js/jQuery.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
     
-    <script>
+    {{-- <script>
         function GetQuestions() {
-
-            // var btn1 = $('#btn1').on('click', function() {
+ 
                 var idc = $('#idc').val();
                 var route="{{route('api.idc.questions')}}";
                 $.ajax({
@@ -203,7 +207,7 @@
 
             // });
         }
-    </script>
+    </script> --}}
 
 </body>
 

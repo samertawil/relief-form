@@ -10,8 +10,8 @@
             <div class="collapse navbar-collapse navmenu">
                 <ul class="navbar-nav" style="text-align: start;">
                     <li class="nav-item px-2"><a href="{{ url('/') }}" class="nav-link">الرئيسية</a></li>
-
-                    <div class="dropdown nav-item ">
+                    <li class="nav-item px-2"><a href="{{ route('address.index') }}" class="nav-link">بياناتي</a></li>
+                    {{-- <div class="dropdown nav-item ">
                         <button class="btn  dropdown-toggle  nav-link" type="button" id="address_menu"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             بياناتي
@@ -19,7 +19,7 @@
                         <div class="dropdown-menu" aria-labelledby="address_menu">
                             <a class="dropdown-item" href="{{ route('address.index') }}">عرض البيانات</a>
                         </div>
-                    </div>
+                    </div> --}}
                     <li class="nav-item px-2"><a href="{{ route('damages.create') }}" class="nav-link">الاضرار</a></li>
                     <li class="nav-item px-2"><a href="#" class="nav-link">حول الاغاثة</a></li>
                     <li class="nav-item px-2"><a href="{{ route('contact-us') }}" class="nav-link">اتصل بنا</a></li>

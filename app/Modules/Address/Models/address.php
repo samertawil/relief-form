@@ -4,7 +4,7 @@ namespace App\Modules\Address\Models;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Modules\Address\Models\CitzenProfile;
+use App\Modules\Address\Models\citizenProfile;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use App\Modules\Status\Models\status;
@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class address extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+   
 
     protected $fillable = [
         'address_name',    'region_id',    'city_id',    'area_id',    'neighbourhood_id',    'street_id',
@@ -24,38 +24,12 @@ class address extends Model
     ];
 
 
-    public static function validate_rules($request)
-    {
-
-        return [
-
-            'region_id' => ['required'],
-            'city_id' => ['required'],
-            'area_id' => ['required'],
-            'neighbourhood_id' => ['required'],
-            'address_specific' => ['required'],
-            'address_type' => [ 
-                Rule::unique('addresses')->where(function ($query)  {
-                    return $query->where('user_id', Auth::id());
-                }),
-            ],
-          
-        ];
-    }
- 
-
-    public static function validate_message()
-    {
-        return [];
-    }
-
-
 
     public static function contacts_data() {
 
         $nearlocs = status::select('id', 'status_name', 'p_id_sub')->wherein('p_id_sub', [2, 5, 10,])->get();
 
-        $profiles = CitzenProfile::where('user_id', Auth::id())->first();
+        $profiles = citizenProfile::where('user_id', Auth::id())->first();
 
         $mobile = '';
 

@@ -6,7 +6,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use App\Modules\Status\Models\status;
 use Illuminate\Database\Eloquent\Model;
-use App\Modules\Address\Models\CitzenProfile;
+use App\Modules\Address\Models\citizenProfile;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -22,7 +22,7 @@ class DamageMaster extends Model
     {
         return [
             'damage_type' => ['required',Rule::unique('damage_masters')->where(function ($query) {
-                return $query->where('profile_id',CitzenProfile::profile()->id);
+                return $query->where('profile_id',citizenProfile::profile()->id);
             }),
         ],
         ];
@@ -41,11 +41,11 @@ class DamageMaster extends Model
        }
 
        public function profile() {
-        return $this->hasOne(CitzenProfile::class,'id','profile_id');
+        return $this->hasOne(citizenProfile::class,'id','profile_id');
        }
 
        public function profile2() {
-        return $this->hasOne(CitzenProfile::class,'user_id','user_id');
+        return $this->hasOne(citizenProfile::class,'user_id','user_id');
        }
 
        

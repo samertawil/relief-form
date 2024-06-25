@@ -11,7 +11,7 @@
 
         <div class="card my-5">
 
-            <form action="{{ route('CitzenProfile.address_status.store') }}" method="post">
+            <form action="{{ route('citizenProfile.address_status.store') }}" method="post">
                 @csrf
                 <div class="card-body">
 

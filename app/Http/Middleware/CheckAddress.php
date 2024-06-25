@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Modules\Address\Models\CitzenProfile;
+use App\Modules\Address\Models\citizenProfile;
 use Closure;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,9 +15,9 @@ class CheckAddress
     public function handle(Request $request, Closure $next, ...$address_type)
     {
 
-        $citzenProfile=CitzenProfile::select('id','current_address_status')->where('user_id',Auth::id())->wherein('current_address_status',[12,13])->first();
+        $citizenProfile=citizenProfile::select('id','current_address_status')->where('user_id',Auth::id())->wherein('current_address_status',[12,13])->first();
        
-        if(!$citzenProfile) {
+        if(!$citizenProfile) {
             return $next($request); 
         }
 

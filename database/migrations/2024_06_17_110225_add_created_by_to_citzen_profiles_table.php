@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('citzen_profiles', function (Blueprint $table) {
+        Schema::table('citizen_profiles', function (Blueprint $table) {
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->timestamp('last_active_at')->nullable();
         });
@@ -26,7 +26,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('citzen_profiles', function (Blueprint $table) {
+        Schema::table('citizen_profiles', function (Blueprint $table) {
             $table->dropColumn('created_by');
             $table->dropColumn('last_active_at');
         });

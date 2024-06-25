@@ -10,7 +10,7 @@
                     <th>طبيعة العنوان</th>
                     <th>المحافظة</th>
                     <th>المدينة</th>
-                    <th>المنطقة</th>
+                 
                     <th>الحي</th>
                     <th>الشارع</th>
                     <th>اقرب معلم</th>
@@ -28,7 +28,7 @@
                         <td>{{ $address->addresstypename->status_name ?? '' }}</td>
                         <td>{{ $address->regionname->region_name }}</td>
                         <td>{{ $address->cityname->city_name }}</td>
-                        <td>{{ $address->areaname->area_name }}</td>
+                     
                         <td>{{ $address->neighbourhoodname->neighbourhood_name ?? '' }}</td>
                         <td>{{ $address->streetname->street_name ?? '' }}</td>
                         <td>{{ $address->nearestlocname->status_name ?? '' }}</td>

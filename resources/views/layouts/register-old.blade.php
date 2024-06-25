@@ -15,23 +15,18 @@
 
     @include('layouts._alert-session')
 
-@php
-    $data=URL::current();
-    $data2=explode('/',$data);
-    $idcFromUrl=($data2[(count($data2))-1]);
-@endphp
+
 
     <div class="d-flex" style="height: 600px;">
         <div class="container m-auto">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">اعادة تعيين كلمة المرور</div>
+                        <div class="card-header">تسجيل حساب جديد</div>
 
                         <div class="card-body">
-                            <form action="{{ route('change.password.submit') }}" method="POST">
+                            <form method="POST" action="{{ route('register') }}">
                                 @csrf
-
 
                                 <div class="row mb-3">
                                     <label for="idc"
@@ -39,20 +34,18 @@
 
                                     <div class="col-md-6">
                                         <input id="idc" type="number"
-                                            class="form-control @error('idc') is-invalid @enderror"   name="idc"
-                                           
-                                            value="{{ old('idc',$idcFromUrl) }}"    >
-                                     
+                                            class="form-control @error('idc') is-invalid @enderror" name="idc"
+                                            value="{{ old('idc') }}" autocomplete="idc" autofocus onchange="GetQuestions()">
+
                                         @error('idc')
                                             <span class="invalid-feedback" role="alert">
                                                 <small>{{ $message }}</small>
                                             </span>
                                         @enderror
                                     </div>
-                                </div>
 
-                                <div>
-                                    <p></p>
+                                 
+
                                 </div>
 
                                 <div class="row mb-3">
@@ -62,8 +55,7 @@
                                     <div class="col-md-6">
                                         <input id="mobile" type="number"
                                             class="form-control @error('mobile') is-invalid @enderror" name="mobile"
-                                            value="{{ old('mobile') }}" autocomplete="mobile"
-                                            title="الرجاء ادخال رقم الهاتف الخليوي حينما قمت بالتسجيل اول مرة">
+                                            value="{{ old('mobile') }}" autocomplete="mobile">
 
                                         @error('mobile')
                                             <span class="invalid-feedback" role="alert">
@@ -82,10 +74,11 @@
                                             
                                         @enderror" name="birthday"
                                             value="{{ old('birthday') }}" autocomplete="birthday">
-                                        @error('birthday')
-                                           <span class="invalid-feedback" role="alert">
-                                            <small>{{$message}}</small>
-                                        </span> 
+
+                                            @error('birthday')
+                                            <span class="invalid-feedback" role="alert">
+                                                <small>{{ $message }}</small>
+                                            </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -95,15 +88,16 @@
                                         الاول</label>
 
                                     <div class="col-md-3">
-                                        <p id="q1" type="text" class="form-control border-0">
-                                            {{ $questions->q1 }}؟</p>
+                                        <p id="q1_p" type="text" class="form-control border-0">
+
+                                        </p>
 
                                     </div>
 
-                                   <div class="col-md-3">
-                                    <input  name="answer_q1" class="form-control">
-                                   </div>
-                                
+                                    <div class="col-md-3">
+                                        <input name="answer_q1" class="form-control">
+                                    </div>
+
                                 </div>
 
                                 <div class="row mb-3">
@@ -112,21 +106,21 @@
                                         الثاني</label>
 
                                     <div class="col-md-3">
-                                        <p id="q2" type="text" class="form-control border-0">
-                                            {{ $questions->q2 }}؟</p>
+                                        <p id="q2_p" type="text" class="form-control border-0">
+                                            {{-- {{ $questions->q2 }} --}}
+                                        </p>
 
                                     </div>
 
-                                   <div class="col-md-3">
-                                    <input  name="answer_q2" class="form-control">
-                                   </div>
-                                
+                                    <div class="col-md-3">
+                                        <input name="answer_q2" class="form-control">
+                                    </div>
+
                                 </div>
 
-                               
                                 <div class="row mb-3">
-                                    <label for="password" class="col-md-4 col-form-label text-md-end">كلمة المرور
-                                        الجديدة</label>
+                                    <label for="password"
+                                        class="col-md-4 col-form-label text-md-end">{{ __('mytrans.password') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="password" type="password"
@@ -142,8 +136,8 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="password-confirm" class="col-md-4 col-form-label text-md-end"> تأكيد
-                                        كلمة المرور </label>
+                                    <label for="password-confirm" class="col-md-4 col-form-label text-md-end">
+                                        {{ __('mytrans.password-confirm') }} </label>
 
                                     <div class="col-md-6">
                                         <input id="password-confirm" type="password" class="form-control"
@@ -155,9 +149,9 @@
 
 
                                 <div class="row mb-0 ">
-                                    <div class="col-md-6 offset-md-4">
+                                    <div class="col-md-6 offset-md-4 text-end">
                                         <button type="submit" class="btn btn-primary">
-                                            تحديث
+                                            تسجيل
                                         </button>
                                     </div>
                                 </div>
@@ -172,6 +166,41 @@
 
     <script src="{{ asset('js/jQuery.js') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
+    
+    <script>
+        function GetQuestions() {
+
+            // var btn1 = $('#btn1').on('click', function() {
+                var idc = $('#idc').val();
+                var route="{{route('api.idc.questions')}}";
+                $.ajax({
+
+                    type: 'get',
+                    url: route+'/' + idc,
+                    success: function(res) {
+
+                        $('#q1_p').html('');
+                        $('#q2_p').html('');
+
+                        $('#q1_p').append(res.q1);
+                        $('#q2_p').append(res.q2);
+
+                        res.forEach(element => {
+
+                            $('#q1_p').append(element.q1 + '؟');
+
+                            $('#q2_p').append(element.q2 + '؟');
+                        });
+
+
+                        $('#btn1').attr('disabled', 'true');
+
+                    }
+                });
+
+            // });
+        }
+    </script>
 
 </body>
 
