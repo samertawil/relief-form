@@ -5,6 +5,7 @@ namespace App\Modules\Damage\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DamageRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Modules\Damage\Models\DamageDetail;
 use App\Modules\Damage\Models\DamageMaster;
@@ -25,12 +26,12 @@ class DamageController extends Controller
 
 
 
-  public function store(Request $request)
+  public function store(DamageRequest $request)
   {
 
     $profile = citizenProfile::profile();
  
-    $request->validate(DamageMaster::validate_rule());
+    // $request->validate(DamageMaster::validate_rule());
 
 
     $data = DamageMaster::create([

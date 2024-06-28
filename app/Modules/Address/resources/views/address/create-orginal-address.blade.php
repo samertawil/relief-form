@@ -9,7 +9,7 @@
 
 
 
-        <form action="{{ route('address.store', 7) }}" method="post">
+        <form action="{{ route('address.store', 7) }}" method="post" >
             @csrf
 
             @include('AddressModule::address._address-form', [
@@ -31,9 +31,7 @@
                             <th>طبيعة العنوان</th>
                             <th>المحافظة</th>
                             <th>المدينة</th>
-                             <th>الحي</th>
-                            <th>الشارع</th>
-                            <th>اقرب معلم</th>
+                             <th>الحي</th>                        
                             <th> اسم المعلم</th>
                             <th>استكمال للعنوان </th>
                             <th>الاجراءات</th>
@@ -47,8 +45,6 @@
                                 <td>{{ $address->regionname->region_name }}</td>
                                 <td>{{ $address->cityname->city_name }}</td>
                                 <td>{{ $address->neighbourhoodname->neighbourhood_name ?? '' }}</td>
-                                <td>{{ $address->streetname->street_name ?? '' }}</td>
-                                <td>{{ $address->nearestlocname->status_name ?? '' }}</td>
                                 <td>{{ $address->locname->location_name ?? '' }}</td>
                                 <td>{{ $address->address_specific ?? '' }}</td>
                                 <td class="d-flex align-items-center justify-content-between">

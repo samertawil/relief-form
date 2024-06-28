@@ -15,7 +15,7 @@ Route::get('/contact-us', function () {
   return view('contact-us');
 })->name('contact-us');
 
-// Route::view('/','index');
+//  Route::view('/','index');
 
 
 require __DIR__.'/AuthRoutes.php';

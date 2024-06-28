@@ -2,20 +2,15 @@
 
 namespace App\Modules\Address\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddressRequest;
-use App\Modules\Address\Models\city;
 use Illuminate\Support\Facades\Auth;
-use App\Modules\Status\Models\status;
 use App\Modules\Address\Models\region;
-use App\Modules\Address\Models\street;
 use App\Modules\Address\Models\address;
-use App\Modules\Address\Models\location;
 use Illuminate\Support\Facades\Validator;
 use App\Modules\Address\Models\citizenProfile;
-use App\Modules\Address\Models\neighbourhood;
+
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class AddressController extends Controller
@@ -23,8 +18,10 @@ class AddressController extends Controller
 
     public function index()
     {
-
-        $addresses = address::with(['regionname', 'cityname',  'neighbourhoodname', 'streetname', 'nearestlocname', 'locname', 'addresstypename'])->latest()->get();
+ 
+        $addresses = address::
+        with(['regionname', 'cityname',  'neighbourhoodname',   'locname', 'addresstypename'])->wherein('address_type',[6,7,8])
+        ->latest()->get();
 
         $contactData = address::contacts_data();
 
@@ -39,22 +36,16 @@ class AddressController extends Controller
 
     public function create_orginal_address()
     {
-
+ 
  
         $regions = region::get();
-        $cities = city::get();
-        $neighbourhoods = neighbourhood::get();
-        $streets = street::get();
-        $nearlocs = status::select('id', 'status_name', 'p_id_sub')->wherein('p_id_sub', [2, 5, 10,])->get();
-        $nearlocnames = location::get();
-
-        $addresses = address::with(['regionname', 'cityname',  'neighbourhoodname', 'streetname', 'nearestlocname', 'locname', 'addresstypename', 'getuserinfo'])->where('user_id', Auth::id())->latest()->get();
+        $addresses = address::with(['regionname', 'cityname',  'neighbourhoodname',   'locname', 'addresstypename', 'getuserinfo'])->where('user_id', Auth::id())->latest()->get();
 
 
-        $address = new address();
-        $profiles = new citizenProfile();
+          $address = new address();
+          $profiles = new citizenProfile();
 
-        return view('AddressModule::address.create-orginal-address', compact('regions', 'cities',  'neighbourhoods', 'streets', 'nearlocs', 'nearlocnames', 'addresses', 'address', 'profiles'));
+        return view('AddressModule::address.create-orginal-address', compact('regions', 'address', 'addresses','profiles'));
     }
 
     public function create_contacts_info()
@@ -73,15 +64,7 @@ class AddressController extends Controller
 
 
         $regions = region::get();
-        $cities = city::get();
-  
-        $neighbourhoods = neighbourhood::get();
-        $streets = street::get();
-        $nearlocs = status::select('id', 'status_name', 'p_id_sub')->wherein('p_id_sub', [2, 5, 10,])->get();
-        $nearlocnames = location::get();
-
-        $addresses = address::with(['regionname', 'cityname',  'neighbourhoodname', 'streetname', 'nearestlocname', 'locname', 'addresstypename', 'getuserinfo'])->where('user_id', Auth::id())->latest()->get();
-
+        $addresses = address::with(['regionname', 'cityname',  'neighbourhoodname',   'locname', 'addresstypename', 'getuserinfo'])->where('user_id', Auth::id())->latest()->get();
 
         $profiles = citizenProfile::where('user_id', Auth::id())->first();
 
@@ -92,7 +75,7 @@ class AddressController extends Controller
         $address = new address();
 
 
-        return view('AddressModule::address.create', compact('regions', 'cities',  'neighbourhoods', 'streets', 'nearlocs', 'nearlocnames', 'addresses', 'address', 'profiles', 'mobile'));
+        return view('AddressModule::address.create', compact('regions','addresses', 'address', 'profiles', 'mobile'));
     }
 
 
@@ -120,18 +103,11 @@ class AddressController extends Controller
     public function edit($id)
     {
 
-        $address = address::with(['regionname', 'cityname',  'neighbourhoodname', 'streetname', 'nearestlocname', 'locname', 'addresstypename'])->findorFail($id);
-        $nearlocs = status::select('id', 'status_name', 'p_id_sub')->wherein('p_id_sub', [2, 5,])->get();
+        $address = address::with(['regionname', 'cityname',  'neighbourhoodname',   'locname', 'addresstypename'])->findorFail($id);
         $regions = region::get();
-        $cities = city::get();
-  
-        $neighbourhoods = neighbourhood::get();
-        $streets = street::get();
-        $nearlocnames = location::get();
-
         $profiles = new citizenProfile();
         $addresses = $address;
-        return view('AddressModule::address.edit', compact('address', 'nearlocs', 'regions', 'cities',  'neighbourhoods', 'streets', 'nearlocnames', 'profiles', 'addresses'));
+        return view('AddressModule::address.edit', compact('address',   'regions',    'profiles', 'addresses'));
     }
 
 
@@ -144,7 +120,7 @@ class AddressController extends Controller
     }
 
 
-    public function destroy($id)
+    public  function destroy($id)
     {
 
         $data = address::destroy($id);

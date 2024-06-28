@@ -19,8 +19,8 @@ class address extends Model
    
 
     protected $fillable = [
-        'address_name',    'region_id',    'city_id',    'area_id',    'neighbourhood_id',    'street_id',
-        'nearest_location_type',    'address_specific',    'address_type',    'gis',    'active',    'user_id',    'near_loc_id'
+        'address_name',    'region_id',    'city_id',    'area_id',    'neighbourhood_id',    
+           'address_specific',    'address_type',    'gis',    'active',    'user_id',    'near_loc_id'
     ];
 
 
@@ -41,11 +41,6 @@ class address extends Model
 
 
 
-    public function nearest_location_status_name()
-    {
-        return $this->hasOne(status::class, 'id', 'nearest_location_type');
-    }
-
     public function regionname()
     {
         return $this->hasOne(region::class, 'id', 'region_id');
@@ -56,27 +51,13 @@ class address extends Model
         return $this->hasOne(city::class, 'id', 'city_id');
     }
 
-    public function areaname()
-    {
-        return $this->hasOne(area::class, 'id', 'area_id');
-    }
 
     public function neighbourhoodname()
     {
         return $this->hasOne(neighbourhood::class, 'id', 'neighbourhood_id');
     }
 
-    public function streetname()
-    {
-        return $this->hasOne(street::class, 'id', 'street_id');
-    }
 
-
-
-    public function nearestlocname()
-    {
-        return $this->hasOne(status::class, 'id', 'nearest_location_type');
-    }
 
 
 
@@ -99,7 +80,7 @@ class address extends Model
         });
     }
 
-    public function getuserinfo()
+    public  function getuserinfo()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }

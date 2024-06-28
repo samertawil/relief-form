@@ -20,7 +20,29 @@
                             <a class="dropdown-item" href="{{ route('address.index') }}">عرض البيانات</a>
                         </div>
                     </div> --}}
-                    <li class="nav-item px-2"><a href="{{ route('damages.create') }}" class="nav-link">الاضرار</a></li>
+                           <div class="dropdown nav-item ">
+                        <button class="btn  dropdown-toggle  nav-link" type="button" id="address_menu"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            الابلاغ عن اضراراقتصادية
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="address_menu">
+                            <a class="dropdown-item" href="#">اضرار في المباني السكنية</a>
+                            <a class="dropdown-item" href="#">اضرار سيارات</a>
+                            <a class="dropdown-item" href="#">اضرار منشاءات</a>
+                        </div>
+                    </div>
+                    <div class="dropdown nav-item ">
+                        <button class="btn  dropdown-toggle  nav-link" type="button" id="address_menu"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              الابلاغ عن اضرار بشرية
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="address_menu">
+                            <a class="dropdown-item" href="{{route('damages.missing.create')}}">استبانة مفقودين تحت الانقاض</a>
+                            <a class="dropdown-item" href="#">ابلاغ عن</a>
+                            <a class="dropdown-item" href="#">اضرار منشاءات</a>
+                        </div>
+                    </div>
+                    {{-- <li class="nav-item px-2"><a href="{{ route('damages.create') }}" class="nav-link">الاضرار</a></li> --}}
                     <li class="nav-item px-2"><a href="#" class="nav-link">حول الاغاثة</a></li>
                     <li class="nav-item px-2"><a href="{{ route('contact-us') }}" class="nav-link">اتصل بنا</a></li>
 

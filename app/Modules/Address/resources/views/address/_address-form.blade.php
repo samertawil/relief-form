@@ -1,5 +1,5 @@
 @section('css-link')
-    {{-- <link rel="stylesheet" href="{{ asset('css/pace-theme-flat-top.css') }}"> --}}
+ 
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
 @endsection
 
@@ -10,14 +10,12 @@
                 width: 170px;
             }
 
-            .w18 {
-                width: 220px;
-            }
-
             .w20 {
                 width: 240px;
             }
-
+            .w21 {
+                width: 280px;
+            }
 
         }
 
@@ -26,19 +24,24 @@
                 width: 200px;
             }
 
-            .w18 {
-                width: 200px;
-            }
-
             .w20 {
-                width: 200px;
+                width: 260px;
             }
+            .w21 {
+                width: 300px;
+            }
+           
 
+        }
+        .select2-selection__clear { 
+            color: blue;
+            margin: auto 10px;
+           
         }
     </style>
 @endsection
-
-@if ($profiles->current_address_status == 13)
+ 
+@if (  $profiles->current_address_status == 13)
 
     <div style="margin-bottom: 10px;">
         <p class="mx-4">المنزل الذي تسكن فيه الان يعود ل ؟</p>
@@ -78,7 +81,6 @@
         </p>
 
 
-
     </div>
     @php
         $type_for_edit = Route::currentRouteName();
@@ -95,11 +97,11 @@
             <div class="card-text">
                 <div class="d-lg-flex">
 
-                    <div class="form-group px-2 w13">
+                    <div class="form-group px-2 w20">
                         <label for="region_id">المحافظة</label>
                         <select name="region_id" id="region_id" onchange="GetData()" @class([
                             ' form-control',
-                            ' js-example-basic-single',
+                            'js-example-basic-single',
                             'a1',
                             'is-invalid' => $errors->has('region_id'),
                         ])>
@@ -114,17 +116,16 @@
                         </select>
                         @include('layouts._show-error', ['field_name' => 'region_id'])
                     </div>
-
-                    <div class="form-group px-2 w13">
+                   
+                    <div class="form-group px-2 w20">
                         <label for="city_id">المدينة</label>
-                        <select name="city_id" id="city_id" onchange="GetData()" @class([
+                        <select name="city_id" id="city_id"  @class([
                             'js-example-basic-single form-control',
                             'a1',
                             'is-invalid' => $errors->has('city_id'),
                         ])>
-                          {{-- <option {{ old('city_id') == $city->id ? 'selected' : '' }}
-                            value="{{ $city->id }}">
-                            {{ $city->city_name }}</option> --}}
+     <option  {{ old('city_id')==$address->city_id ?' selected' : ''  }} value="{{$address->city_id }}">  {{ $address->cityname->city_name ?? null }}</option>
+                              
                             {{-- @foreach ($cities->whereNotIn('id', $address->city_id) as $city)
  <option {{ old('city_id') == $city->id ? 'selected' : '' }}
      value="{{ $city->id }}">
@@ -133,9 +134,9 @@
                         </select>
                         @include('layouts._show-error', ['field_name' => 'city_id'])
                     </div>
+             
 
-
-                    <div class="form-group px-2 w18">
+                    <div class="form-group px-2 w20">
                         <label for="neighbourhood_id">الحي</label>
                         <select name="neighbourhood_id" id="neighbourhood_id" @class([
                             'js-example-basic-single form-control',
@@ -153,53 +154,23 @@
                         </select>
                         @include('layouts._show-error', ['field_name' => 'neighbourhood_id'])
                     </div>
-                    <div class="form-group px-2 w20">
-                        <label for="street_id">الشارع</label>
-                        <select name="street_id" id="street_id" @class([
-                            'js-example-basic-single form-control',
-                            'is-invalid' => $errors->has('street_id'),
-                        ])>
-                            <option value="{{ $address->street_id }}">{{ $address->streetname->street_name ?? null }}
-                            </option>
-                            @foreach ($streets->whereNotIn('id', $address->street_id) as $street)
-                                <option {{ old('street_id') == $street->id ? 'selected' : '' }}
-                                    value="{{ $street->id }}">{{ $street->street_name }}</option>
-                            @endforeach
-                        </select>
-                        @include('layouts._show-error', ['field_name' => 'street_id'])
-                    </div>
 
-                    {{-- <div class="form-group px-2 w13">
-                        <label for="nearest_location_type">{{ $typeName ?? 'اقرب معلم' }}</label>
-                        <select name="nearest_location_type" @class([
-                            'js-example-basic-single form-control',
-                            'is-invalid' => $errors->has('nearest_location_type'),
-                        ])>
-                            <option value="{{ $address->nearest_location_type }}">
-                                {{ $address->nearestlocname->status_name ?? null }}</option>
-                            @foreach ($nearlocs->where('p_id_sub', 2)->whereNotIn('id', $address->nearest_location_type) as $nearloc)
-                                <option {{ old('nearest_location_type') == $nearloc->id ? 'selected' : '' }}
-                                    value="{{ $nearloc->id }}">{{ $nearloc->status_name }}</option>
-                            @endforeach
-                        </select>
-                        @include('layouts._show-error', [
-                            'field_name' => 'nearest_location_type',
-                        ])
-                    </div> --}}
 
-                    <div class="form-group px-2 w20">
-                        <label for="near_loc_id">{{ $locationName ?? 'اسم المعلم' }}</label>
+
+                    <div class="form-group px-2 w21">
+                        <label for="near_loc_id">{{ $locationName ?? 'اسم اقرب معلم' }}</label>
                         <select name="near_loc_id" id="near_loc_id" @class([
                             'js-example-basic-single form-control',
+                            'a1',
                             'is-invalid' => $errors->has('near_loc_id'),
                         ])>
-                            <option value="{{ $address->near_loc_id }}">{{ $address->locname->location_name ?? null }}
-                            </option>
-                            @foreach ($nearlocnames->whereNotIn('id', $address->near_loc_id) as $nearlocname)
+                              <option value="{{ $address->near_loc_id }}">{{ $address->locname->location_name ?? null }}
+                            </option>  
+                            {{-- @foreach ($nearlocnames->whereNotIn('id', $address->near_loc_id) as $nearlocname)
                                 <option {{ old('near_loc_id') == $nearlocname->id ? 'selected' : '' }}
                                     value="{{ $nearlocname->id }}">{{ $nearlocname->location_name }}
                                 </option>
-                            @endforeach
+                            @endforeach   --}}
                         </select>
                         @include('layouts._show-error', ['field_name' => 'near_loc_id'])
                     </div>
@@ -224,59 +195,43 @@
 
             </div>
 
-
-
-
         </div>
 
     </div>
 
-
-
 </div>
 
-
 @section('js')
-    <script src="{{ asset('js/select2.min.js') }}"></script>
+     <script src="{{ asset('js/select2.min.js') }}"></script>
     <script>
         $('.js-example-basic-single').select2({
             placeholder: 'اختار',
-
-        });
+            allowClear: true,
+      });
+ 
     </script>
 
-    <script>
-        $('.js-example-basic-single2').select2({
-            placeholder: 'اختار',
-
-        });
-    </script>
-
-
+   
     <script>
         $('#region_id').on('change', function() {
-          
-           $('#city_id').find('option').remove().end().append('<option value=""></option>').val('');
-           $('#neighbourhood_id').find('option').remove().end().append('<option value=""></option>').val('');
-           $('#street_id').find('option').remove().end().append('<option value=""></option>').val('');
-           $('#near_loc_id').find('option').remove().end().append('<option value=""></option>').val('');
-        
+
+            $('#city_id').find('option').remove().end().append('<option value=""></option>').val('');
+            $('#neighbourhood_id').find('option').remove().end().append('<option value=""></option>').val('');
+            $('#near_loc_id').find('option').remove().end().append('<option value=""></option>').val('');
+
         });
 
         $('#city_id').on('change', function() {
-          
-          $('#neighbourhood_id').find('option').remove().end().append('<option value=""></option>').val('');
-          $('#street_id').find('option').remove().end().append('<option value=""></option>').val('');
-          $('#near_loc_id').find('option').remove().end().append('<option value=""></option>').val('');
-       
-       });
 
-       $('#neighbourhood_id').on('change', function() {
-          
-          $('#street_id').find('option').remove().end().append('<option value=""></option>').val('');
-          $('#near_loc_id').find('option').remove().end().append('<option value=""></option>').val('');
-       
-       });
+            $('#neighbourhood_id').find('option').remove().end().append('<option value=""></option>').val('');
+            $('#near_loc_id').find('option').remove().end().append('<option value=""></option>').val('');
+
+        });
+
+        $('#neighbourhood_id').on('change', function() {
+        $('#near_loc_id').find('option').remove().end().append('<option value=""></option>').val('');
+
+        });
 
 
 
@@ -284,7 +239,7 @@
             var val = $(this).val();
             var field_name = $(this).attr('name');
             var route = "{{ route('api.address') }}";
-           
+            
             $.ajax({
                 type: 'get',
                 url: route + '/' + val + '/' + field_name,
@@ -293,21 +248,40 @@
                     if (field_name === 'region_id') {
                         res.forEach(element => {
                             var card =
-                                `<option value="${element.id}">${element.city_name}</option>`
+         `<option  value="${element.id}">${element.city_name}</option>`
                             $('#city_id').append(card);
                         });
-                    }
-                     else if (field_name === 'city_id') {
+                    } else if (field_name === 'city_id') {
+                        let city_old = {{old('city_id',0)}};
+                            let city_select= '';
+                        res.forEach(element => {
+                           
+                            if(city_old==element.id) city_select='selected';
+                            var card = '<option  '+city_select+' value='+element.id+' >'+element.neighbourhood_name+'</option>';
+                            $('#neighbourhood_id').append(card);
+                        });
+                    } else if (field_name === 'neighbourhood_id') {
 
                         res.forEach(element => {
-                     
+
                             var card =
-                                `<option value="${element.id}">${element.neighbourhood_name}</option>`
-                            $('#neighbourhood_id').append(card);
+                                `<option    value="${element.id}">${element.location_name}</option>`
+                            $('#near_loc_id').append(card);
                         });
                     }
                 }
             })
         })
+
+        @if (old('city_id'))
+ $('#region_id').trigger('change');
+     
+ @endif
     </script>
+
+
+
+ 
+
 @endsection
+  

@@ -2,27 +2,31 @@
 
 namespace app\Modules\Damage\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\citizen;
+use App\Modules\Status\Models\status;
+use App\Modules\Address\Models\address;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MissingPeople extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+ 
 
-    protected $fillable = ['created_by', 'strike_date', 'building_name', 'floor', 'building_type', 'address_id', 'active'];
+    protected $fillable = ['created_by','provider','idc', 'living_type', 'missing_date', 'building_name', 'floor', 'building_type', 'address_id', 'active'];
 
-    public static function validate_rules() {
 
-        return [
-            'created_by'=>['required'],
-            'strike_date'=>['required'],
-            'building_name'=>['required'],
-            'building_type'=>['required'],
-            'floor'=>['required'],
-            'address_id'=>['required'],
-        ];
-
+    public function citizen() {
+        return $this->hasOne(citizen::class,'idc','idc');
     }
+
+    public function livingStatusName() {
+        return $this->hasOne(status::class,'id','living_type');
+    }
+
+    public function address() {
+        return $this->hasOne(address::class,'id','address_id');
+    }
+    
 }

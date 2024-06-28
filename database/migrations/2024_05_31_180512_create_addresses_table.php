@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('city_id')->constrained('cities');
             $table->foreignId('area_id')->constrained('areas');
             $table->foreignId('neighbourhood_id')->constrained('neighbourhoods');
-            $table->foreignId('street_id')->nullable()->constrained('streets');
+          
             $table->foreignId('nearest_location_type')->nullable()->constrained('statuses'); //مسجد , مدرسة , الخ
             $table->string('address_specific'); // باقي العنوان بالتفصيل
             $table->foreignId('address_type')->nullable()->constrained('statuses'); // نوع العنوان , عنوان سكن او عنوان للعمل او عنوان لمكان النزوح او عناون سكن بشكل دائم

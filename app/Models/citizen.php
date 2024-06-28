@@ -9,7 +9,7 @@ class citizen extends Model
 {
     use HasFactory;
 
-public static function current_user_citizen_id($idc ) {
+public static function current_user_citizen_id($idc) {
 
     $currentCitizen = citizen::where('idc',$idc)->first();
     

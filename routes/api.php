@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ChangePasswordController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/apiq/{idc?}',[ChangePasswordController::class,'apiq'])->name('api.idc.questions');
+
+Route::get('api-idc/{idc?}',[ApiController::class,'api_idc'])->name('api.get.idc');

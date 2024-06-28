@@ -27,7 +27,7 @@ return [
     'array' => 'The :attribute must be an array.',
     'ascii' => 'The :attribute must only contain single-byte alphanumeric characters and symbols.',
     'before' => 'The :attribute must be a date before :date.',
-    'before_or_equal' => 'The :attribute must be a date before or equal to :date.',
+    'before_or_equal' => 'الحقل :attribute لا يمكن ان يكون اعلى من تاريخ اليوم ',
     'between' => [
         'array' => 'The :attribute must have between :min and :max items.',
         'file' => 'The :attribute must be between :min and :max kilobytes.',
@@ -200,7 +200,11 @@ return [
         'damage_specific'=>'طبيعة الضرر',
         'answer_q1'=>'اجابة السؤال الاول',
         'answer_q2'=>'اجابة السؤال الثاني',
-    ],
+        'living_type'=>'التواجد بالمبنى ', 
+        'missing_date'=>'تاريخ الفقد',
+        'building_type'=>'نوع المبنى',
+        'building_name'=>'اسم المبنى',
+       ],
 
 ];
  

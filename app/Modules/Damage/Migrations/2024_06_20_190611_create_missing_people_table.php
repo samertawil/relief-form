@@ -13,25 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('missing_people', function (Blueprint $table) {
+        Schema::create('missing_people', function (Blueprint $table) { // جثث المفقودين تحت الانقاض - الدفاع المدني
             $table->id();
-            $table->foreignId('created_by')->constrained('citizen_profiles'); // تم تعبئة الاستبانة بواسطة صاحب البروفايل
-            $table->date('strike_date'); // تاريخ استهداف المبنى
+            $table->integer('idc')->nullable();
+            $table->foreignId('living_type')->constrained('statuses'); // مقيم ام نازح
+            $table->foreignId('created_by')->constrained('citizen_profiles'); //  مدخل البيانات , في حال نظام المواطنين فسيكون مدخل البيانات هو نفسه صاحب التبليغ اما في حال نظام الوزارة فسيكون هذا الحقل هو الموظف المدخل للبيان اما صاحب التبليغ فسيكون اسمه provider     
+            $table->date('missing_date'); // تاريخ الفقدان 
             $table->string('building_name');
             $table->unsignedInteger('floor');
             $table->foreignId('building_type')->constrained('statuses');
             $table->foreignId('address_id')->constrained('addresses');
             $table->enum('active',[0,1])->default(1);
-            $table->softDeletes();
+        
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('missing_people');

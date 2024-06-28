@@ -18,15 +18,7 @@ class DamageMaster extends Model
     protected $fillable = ['damage_type', 'profile_id', 'created_by', 'active', 'status_id'];
 
 
-    public static function validate_rule()
-    {
-        return [
-            'damage_type' => ['required',Rule::unique('damage_masters')->where(function ($query) {
-                return $query->where('profile_id',citizenProfile::profile()->id);
-            }),
-        ],
-        ];
-    }
+
 
     public static function damage_data() {
 
