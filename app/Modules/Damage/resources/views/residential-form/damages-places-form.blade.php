@@ -1,0 +1,256 @@
+@extends('layouts.master')
+
+@section('css-link')
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/myTableResponsive.css') }}">
+
+@endsection
+
+
+@section('content')
+    <div class="container">
+
+        @include('layouts._error-form')
+
+        @include('layouts._alert-session')
+    </div>
+
+
+    <section>
+
+        <form action="{{ route('damages.places.store') }}" method="post">
+            @csrf
+            <input name="created_by" type="hidden" value="{{ Auth::user()->profile->id ?? 9999999999 }}"
+                class="form-control container">
+
+            <div class="container border mt-2 mb-5 bg-white ">
+                <div class="text-center">
+                    <p class="lead py-4 fw-bold ">استبانة حصر المنشاءات السكنية المتضررة <span class="text-danger fw-bolder text-center ">النموذج الاول</span> </p>
+                </div>
+             
+                <div class="dropdown-divider"></div>
+                <div>
+
+                    <div class="text-start p-3 d-flex">
+                        <p class="text-primary fw-bold"> مقدم الاستبانة:</p>
+                        <p> {{ Auth::user()->full_name }} </p>
+                        <p class="px-4"><span
+                                class="text-primary fw-bold">جوال:</span>{{ Auth::user()->profile->mobile1 ?? '' }} </p>
+                    </div>
+                </div>
+
+                <div class="dropdown-divider"></div>
+
+                <div class="container   mt-2 mb-5 bg-white ">
+
+                <div class="text-start p-3">
+                
+                    <p class="card-header ">
+                        <a data-toggle="collapse" href="#collapse-building-name" aria-expanded="true"
+                            aria-controls="collapse-building-name" id="heading-building-name" class="d-block fw-bold ">
+                            <i class="fa fa-chevron-down pull-right "></i>
+                            بيانات المبنى
+                        </a>
+
+                    </p>
+
+                </div>
+
+                <div id="collapse-building-name" class="collapse show" aria-labelledby="collapse-building-name">
+
+                    <div class="mb-4">
+
+                        <div class="row justify-content-between">
+
+                            <div class="p-3 col-lg-3" id="building_name_div">
+                                <label for="building_name" class="form-label">{{ __('mytrans.building_name') }} <span
+                                        style="font-size: 11px;" class="text-muted">مثال:بيت عائلة ال**,عمارة الوطن </span>
+                                </label>
+
+                                <input type="text" name="building_name" value="{{ old('building_name') }}"
+                                    id="building_name" @class([
+                                        'form-control',
+                                        'is-invalid' => $errors->has('building_name'),
+                                    ])>
+                                @include('layouts._show-error', ['field_name' => 'building_name'])
+                            </div>
+
+                            <div class="p-3 col-lg-1" id="floor_div">
+                                <label style="width: 110px;" for="floor"
+                                    class="text-start form-label">{{ __('mytrans.floor') }}</label>
+                                <input type="number" name="floor" min="1" max="25" id="floor"
+                                    @class(['form-control', 'is-invalid' => $errors->has('floor')])>
+                                @include('layouts._show-error', ['field_name' => 'floor'])
+                            </div>
+                            <div class="p-3 col-lg-1" id="units_count_div">
+                                <label style="width: 110px;" for="units_count"
+                                    class="text-start  form-label">{{ __('mytrans.units_count') }}</label>
+                                <input type="number" name="units_count" min="1" max="25" id="units_count"
+                                    @class(['form-control', 'is-invalid' => $errors->has('units_count')])>
+                                @include('layouts._show-error', ['field_name' => 'units_count'])
+                            </div>
+
+                            <div class="p-3  col-lg-5">
+
+                                <label class="form-label "> {{ __('mytrans.building_type') }}
+                                </label>
+
+                                <div class="d-flex">
+                                    @foreach (config('damagmodule')['buildingType'] as $key => $buildingType)
+                                        <div class="p-2" id="building_type_div">
+
+                                            <input type="radio" name="building_type"
+                                                id="building_type{{ $buildingType }}" value="{{ $buildingType }}"
+                                                @checked(old('building_type') == $buildingType) @class([
+                                                    'form-check-input',
+                                                    'is-invalid' => $errors->has('building_type'),
+                                                ])>
+                                            <label for="building_type{{ $buildingType }}"
+                                                class="form-label fw-normal mr-4">{{ $key }}</label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                @include('layouts._show-error', ['field_name' => 'building_type'])
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="row justify-content-evently ">
+
+                        <div class="p-3 col-lg-3">
+                            <label for="damage_date" class="form-label">{{ __('mytrans.damage_date') }}</label>
+                            <div>
+
+                            </div>
+                            <input type="date" name="damage_date" id="damage_date" value="{{ old('damage_date') }}"
+                                @class(['form-control', 'is-invalid' => $errors->has('damage_date')])>
+                            @include('layouts._show-error', ['field_name' => 'damage_date'])
+                        </div>
+                        <div class="p-3 col-lg-6">
+
+                            <label class="form-label" for="notes">ملاحظات</label>
+                            <textarea maxlength="255" name="notes" rows="3" id="notes" @class(['form-control'])>{{ old('notes') }}</textarea>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div id="address_form_id">
+                        @include('AddressModule::address._address-form', [
+                            'address_title' => 'عنوان المبنى المستهدف',
+                            'type' => 54,
+                        ])
+
+                    </div>
+
+                </div>
+
+                <div>
+
+                    @include('layouts.2button', ['name' => 'حفظ واستكمال'])
+
+                </div>
+            </div>
+            </div>
+        </form>
+ 
+        <main>
+            <div role="region" aria-labelledby="Cap1" tabindex="0">
+                <table class=" table hover container " id="mytable">
+
+                    <tr class="m-auto">
+                        <th>اسم المفقود</th>
+                        <th>تاريخ الفقد</th>
+                        <th>مقيم/نازح</th>
+                        <th>اسم المبنى المستهدف</th>
+                        <th>اسم اقرب معلم</th>
+                        <th>الاجراءات</th>
+
+                    </tr>
+
+
+                    <tr style=" align-items: center;">
+                        <td>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="d-flex align-items-center justify-content-between">
+
+                            <form action="#" method="post">
+                                <button type="submit" class="btn btn-lg"
+                                    onclick="return confirm('هل انت متأكد من مسح البيان ؟')"><i
+                                        class=" m-auto fas fa-trash text-danger mx-3 h5"></i></button>
+
+                                @csrf
+                                @method('delete')
+                            </form>
+
+                        </td>
+                    </tr>
+
+
+
+                </table>
+            </div>
+        </main>
+    </section>
+
+
+
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/myTableResponsive.js') }}"></script>
+    <script>
+        $('#btn1').on("click", function() {
+            alert('dsds');
+        });
+
+
+        $('#idc').on('change', function() {
+            let idcvalue = $('#idc').val();
+            let route = "{{ route('api.get.idc') }}";
+
+            $.ajax({
+                type: 'get',
+                url: route + '/' + idcvalue,
+                success: function(res) {
+
+                    let card = `<p>  صاحب الهوية: ` + res['CI_FIRST_ARB'] + ' ' + res['CI_FATHER_ARB'] +
+                        ' ' +
+                        res['CI_GRAND_FATHER_ARB'] + ' ' + res['CI_FAMILY_ARB'] + `</p>`;
+
+                    $('#citzenname').append(card);
+
+                }
+            })
+
+        })
+    </script>
+
+    <script>
+        $('.buildings').on('change', function() {
+
+            let x = $(this).val();
+            if (x != 0) {
+                $('#building_name_div').addClass("d-none");
+                $('#floor_div').addClass("d-none");
+                $('#building_type_div2').addClass("d-none");
+                $('#building_type_div input,#building_type_div label').addClass("d-none");
+                $('#address_form_id').addClass("d-none");
+
+            } else {
+                $('#building_name_div').removeClass("d-none");
+                $('#floor_div').removeClass("d-none");
+                $('#building_type_div2').addClass("d-none");
+                $('#building_type_div input, #building_type_div label').removeClass("d-none");
+                $('#address_form_id').removeClass("d-none");
+            }
+        });
+    </script>
+@endsection

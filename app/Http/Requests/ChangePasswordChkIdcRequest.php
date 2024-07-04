@@ -16,7 +16,7 @@ class ChangePasswordChkIdcRequest extends FormRequest
     public function rules()
     {
          return [
-         'idc'=>[ 'required','exists:citizens,idc','exists:users,idc'],
+         'idc'=>[ 'required','exists:ssn_login_ques_tb,idc','exists:users,idc'],
          
         ];
 

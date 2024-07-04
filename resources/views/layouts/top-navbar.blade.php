@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar bg-dark  navbar-expand-md navbar-dark justify-content-between align-items-center py-3 ">
+    <nav  class="navbar bg-dark  navbar-expand-md navbar-dark justify-content-between align-items-center py-3 ">
         <div class="container">
 
             <button class="navbar-toggler my-3" type="button" data-bs-toggle="collapse" data-bs-target=".navmenu">
@@ -9,18 +9,10 @@
 
             <div class="collapse navbar-collapse navmenu">
                 <ul class="navbar-nav" style="text-align: start;">
-                    <li class="nav-item px-2"><a href="{{ url('/') }}" class="nav-link">الرئيسية</a></li>
-                    <li class="nav-item px-2"><a href="{{ route('address.index') }}" class="nav-link">بياناتي</a></li>
-                    {{-- <div class="dropdown nav-item ">
-                        <button class="btn  dropdown-toggle  nav-link" type="button" id="address_menu"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            بياناتي
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="address_menu">
-                            <a class="dropdown-item" href="{{ route('address.index') }}">عرض البيانات</a>
-                        </div>
-                    </div> --}}
-                           <div class="dropdown nav-item ">
+                    <li id="t1" class="nav-item px-2"><a href="{{ url('/') }}" class="nav-link">الرئيسية</a></li>
+                    <li class="hidden nav-item px-2"><a href="{{ route('address.index') }}" class="nav-link">بياناتي</a></li>
+                  
+                           {{-- <div  class=" dropdown nav-item ">
                         <button class="btn  dropdown-toggle  nav-link" type="button" id="address_menu"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             الابلاغ عن اضراراقتصادية
@@ -30,16 +22,16 @@
                             <a class="dropdown-item" href="#">اضرار سيارات</a>
                             <a class="dropdown-item" href="#">اضرار منشاءات</a>
                         </div>
-                    </div>
-                    <div class="dropdown nav-item ">
+                    </div> --}}
+                    <div class=" hidden dropdown nav-item ">
                         <button class="btn  dropdown-toggle  nav-link" type="button" id="address_menu"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              الابلاغ عن اضرار بشرية
+              الابلاغ عن اضرار 
                         </button>
                         <div class="dropdown-menu" aria-labelledby="address_menu">
                             <a class="dropdown-item" href="{{route('damages.missing.create')}}">استبانة مفقودين تحت الانقاض</a>
-                            <a class="dropdown-item" href="#">ابلاغ عن</a>
-                            <a class="dropdown-item" href="#">اضرار منشاءات</a>
+                            <a class="dropdown-item" href="{{route('damages.places.create')}}">استبانة حصر الاضرار السكنية</a>
+                          
                         </div>
                     </div>
                     {{-- <li class="nav-item px-2"><a href="{{ route('damages.create') }}" class="nav-link">الاضرار</a></li> --}}
@@ -79,4 +71,6 @@
         </div>
 
     </nav>
+ 
+ 
 </header>

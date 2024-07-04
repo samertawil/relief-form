@@ -8,11 +8,7 @@ use App\Modules\Address\Models\citizenProfile;
 
 class CitzenRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+ 
     public function authorize()
     {
         return true;
@@ -26,7 +22,8 @@ class CitzenRequest extends FormRequest
             'mobile1' => ['required', 'numeric',  'unique:citizen_profiles', 'min_digits:9', 'max_digits:10'],
             'mobile2' => ['nullable', 'numeric'],
             'email' => ['nullable', 'email'],
-            'current_address_status' => ['required']
+            'current_address_status' => ['required'],
+            'citizen_idc'=>['nullable','exists:ssn_login_ques_tb,idc'],
 
         ];
 

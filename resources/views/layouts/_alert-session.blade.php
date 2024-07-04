@@ -6,18 +6,23 @@
                 {{-- <span aria-hidden="true">&times;</span> --}}
             </button>
         </div>
- 
-
     @endif
 
-    <script>
-        setTimeout(() => {
-            $('.alert').fadeOut()
-        }, 3000);
-   
-    </script>
+    @if (Route::current()->uri() == 'address/create-orginal-address' ||
+            Route::current()->uri() == 'address/create-contacts-info' ||
+            Route::current()->uri() == 'address/create')
+        <script>
+            setTimeout(() => {
+                $('.alert').fadeOut()
+            }, 30000);
+        </script>
+    @else
+        <script>
+            setTimeout(() => {
+                $('.alert').fadeOut()
+            }, 3000);
+        </script>
+    @endif
 </body>
 
 </html>
-
-

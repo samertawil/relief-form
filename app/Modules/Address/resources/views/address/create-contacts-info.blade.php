@@ -1,5 +1,10 @@
 @extends('layouts.master')
 
+@section('css-link')
+<link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+<link rel="stylesheet" href="{{asset('css/myTableResponsive.css')}}">
+@endsection
+
 @section('content')
     <section class="container">
 
@@ -19,23 +24,25 @@
 
                     <p class="card-header text-primary text-justify fw-bold ">بيانات الاتصال والتواصل</p>
 
-                    <div class=" my-3">
+                    <section class=" my-3">
+
+
 
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-lg-4">
                                 <label for="" class="fw-bold form-label"> الهاتف الخليوي </label>
                                 <input type="text" name="mobile1" @class(['form-control', 'is-invalid' => $errors->has('mobile1')])
                                     value="{{ $profiles->mobile1 ?? $mobile }}">
                             </div>
 
-                            <div class="col-4">
+                            <div class="col-lg-4 my-4  my-lg-0 ">
                                 <label for="" class="fw-bold form-label"> الهاتف الخليوي 2</label>
                                 <input type="text" name="mobile2" @class(['form-control', 'is-invalid' => $errors->has('mobile2')])
                                     value="{{ $profiles->mobile2 ?? '' }}">
                             </div>
 
 
-                            <div class="col-4">
+                            <div class="col-lg-4 ">
                                 <label for="" class="fw-bold form-label"> البريد الالكتروني </label>
                                 <input type="email" name="email" @class(['form-control', 'is-invalid' => $errors->has('email')])
                                     value="{{ $profiles->email ?? '' }}">
@@ -43,7 +50,7 @@
 
                         </div>
 
-                    </div>
+                    </section>
 
                     <div class=" my-3">
                         <p class="fw-bold">الحالة الحالية للسكن</p>
@@ -70,4 +77,8 @@
         </div>
 
     </section>
+
+  
+
+
 @endsection

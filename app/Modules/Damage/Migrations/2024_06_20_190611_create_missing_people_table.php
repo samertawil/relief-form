@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('missing_people', function (Blueprint $table) { // جثث المفقودين تحت الانقاض - الدفاع المدني
             $table->id();
-            $table->integer('idc')->nullable();
+            $table->foreignId('idc')->constrained('ssn_login_ques_tb');
             $table->foreignId('living_type')->constrained('statuses'); // مقيم ام نازح
             $table->foreignId('created_by')->constrained('citizen_profiles'); //  مدخل البيانات , في حال نظام المواطنين فسيكون مدخل البيانات هو نفسه صاحب التبليغ اما في حال نظام الوزارة فسيكون هذا الحقل هو الموظف المدخل للبيان اما صاحب التبليغ فسيكون اسمه provider     
             $table->date('missing_date'); // تاريخ الفقدان 

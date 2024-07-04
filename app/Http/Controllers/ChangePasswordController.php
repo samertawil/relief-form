@@ -37,7 +37,7 @@ class ChangePasswordController extends Controller
 
     $validator = Validator::make($request->all(), []);
 
-    if (!( $citizen->birthday == $request->birthday)) {
+    if (!( $citizen->CI_BIRTH_DT == $request->birthday)) {
 
       $validator->errors()->add('birthday', 'تاريخ الميلاد غير صحيح');
       return redirect()->back()->withErrors($validator)->withInput();

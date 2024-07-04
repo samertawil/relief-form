@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Modules\Address\Models\city;
+use Illuminate\Support\Facades\Auth;
 use App\Modules\Address\Models\location;
 use App\Modules\Address\Models\neighbourhood;
+use App\Modules\Address\Models\citizenProfile;
 
 class ApiController extends Controller
 {
@@ -35,8 +37,12 @@ class ApiController extends Controller
             return response($nearlocnames, 200);
         }
 
-       
+               
+    }
 
-        
+    public function profile() {
+        $profile=citizenProfile::select('current_address_status')->where('user_id',Auth::id())->first();
+       
+        return response($profile,200);
     }
 }

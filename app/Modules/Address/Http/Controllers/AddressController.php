@@ -4,13 +4,14 @@ namespace App\Modules\Address\Http\Controllers;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AddressRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\AddressRequest;
+
 use App\Modules\Address\Models\region;
 use App\Modules\Address\Models\address;
 use Illuminate\Support\Facades\Validator;
-use App\Modules\Address\Models\citizenProfile;
 
+use App\Modules\Address\Models\citizenProfile;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class AddressController extends Controller
@@ -18,7 +19,7 @@ class AddressController extends Controller
 
     public function index()
     {
- 
+       
         $addresses = address::
         with(['regionname', 'cityname',  'neighbourhoodname',   'locname', 'addresstypename'])->wherein('address_type',[6,7,8])
         ->latest()->get();
@@ -37,7 +38,7 @@ class AddressController extends Controller
     public function create_orginal_address()
     {
  
- 
+        $contactData = address::contacts_data();
         $regions = region::get();
         $addresses = address::with(['regionname', 'cityname',  'neighbourhoodname',   'locname', 'addresstypename', 'getuserinfo'])->where('user_id', Auth::id())->latest()->get();
 
@@ -45,7 +46,9 @@ class AddressController extends Controller
           $address = new address();
           $profiles = new citizenProfile();
 
-        return view('AddressModule::address.create-orginal-address', compact('regions', 'address', 'addresses','profiles'));
+  
+        return view('AddressModule::address.create-orginal-address')->with('regions',$regions)->with('address', $address)
+        ->with('addresses',$addresses)->with('mobile',$contactData['mobile'])->with('profiles', $contactData['profiles'])->with('nearlocs', $contactData['nearlocs']);
     }
 
     public function create_contacts_info()
@@ -81,6 +84,7 @@ class AddressController extends Controller
 
     public function store(AddressRequest $request, $address_type)
     {
+    
         $data =  array_merge($request->all(), ['address_name' => Auth::user()->idc, 'user_id' => Auth::id(), 'address_type' => $address_type]);
 
         $profile = address::contacts_data();
@@ -95,7 +99,8 @@ class AddressController extends Controller
 
    
         address::create($data);
-        return redirect()->back()->with('message', 'تم الحفظ بنجاح')->with('type', 'success');
+          return redirect()->route('main.page')->with('message', 'تم حفظ العنوان بنجاح')->with('type', 'success');;
+        //   return redirect()->back()->with('message', 'تم الحفظ بنجاح')->with('type', 'success');
     }
 
 

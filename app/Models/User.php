@@ -50,17 +50,6 @@ class User extends Authenticatable
     }
 
 
-    // public static function forget_password_validate_rule()
-    // {
-
-    //     return [
-    //         'idc' => ['required', 'numeric', 'min_digits:9', 'max_digits:9'],
-    //         'mobile' => ['required', 'numeric',   'min_digits:10', 'max_digits:10'],
-    //         'password' => ['required', 'string', 'min:4', 'confirmed'],
-    //     ];
-    // }
-
-
     public function UserAddress()
     {
         return $this->hasone(address::class, 'user_id', 'id');

@@ -15,7 +15,7 @@ class citizenProfile extends Model
 
     protected $table = 'citizen_profiles';
 
-    protected $fillable = ['citizen_id',    'user_id',    'current_address_status',    'mobile1',    'mobile2',    'email'];
+    protected $fillable = ['citizen_idc',    'user_id',    'current_address_status',    'mobile1',    'mobile2',    'email'];
 
 
     public static function profile() {
@@ -24,7 +24,7 @@ class citizenProfile extends Model
     }
 
     public function citizen() {
-        return $this->hasOne(citizen::class,'id','citizen_id');
+        return $this->hasOne(citizen::class,'idc','citizen_idc');
     }
 }
 

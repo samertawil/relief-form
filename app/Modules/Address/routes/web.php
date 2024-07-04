@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
  
 use App\Modules\Address\Http\Controllers\AddressController;
 use App\Modules\Address\Http\Controllers\ApiController;
-use App\Modules\Address\Http\Controllers\citizenController;
+use App\Modules\Address\Http\Controllers\CitizenController;
 
 Route:: middleware(['web','auth'])->group(function() {
 
@@ -20,9 +20,9 @@ Route:: middleware(['web','auth'])->group(function() {
  Route::get('/address/edit/{id}',[AddressController::class,'edit'])->name('address.edit');
  Route::put('/address/update/{id}',[AddressController::class,'update'])->name('address.update');
  Route::delete('/address/destroy/{id}',[AddressController::class,'destroy'])->name('address.destroy');
- Route::post('/ctzn-profile/address-status',[citizenController::class,'store'])->name('citizenProfile.address_status.store');
+ Route::post('/ctzn-profile/address-status',[CitizenController::class,'store'])->name('citizenProfile.address_status.store');
 
-
+ Route::get('/api/profile',[ApiController::class,'profile'])->name('api.profile');
 });
 
  Route::get('/api/test1/{value?}/{model?}',[ApiController::class,'api_test1'])->name('api.address');

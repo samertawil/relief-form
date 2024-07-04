@@ -12,8 +12,8 @@ return [
         'description'=>'الوصف',
         'register_new_account'=>'تسجيل حساب جديد',
         'Forgot Your Password' =>'نسيت كلمة المرور',
-        'address_specific' =>'استكمال العنوان',
-        'address specific' =>'استكمال العنوان',
+        'address_specific' =>'العنوان بالتفصيل',
+       
         'address type' =>'طبيعة العنوان',
         'damage_type'=>'نوع الضرر',
         'created_at'=>'تاريخ الاضافة',
@@ -22,4 +22,14 @@ return [
         'add_new'=>'إضافة',
         'delete_record'=>'حذف',
         'file_num'=>'رقم الملف',
+        'floor'=>'عدد الطوابق',
+        'building_name'=>'اسم المبنى',
+        'owner_idc'=>'رقم هوية المالك',
+        'citizen_type'=>'حالة المواطنة',
+        'damage_date'=>'تاريخ الضرر',
+        'unit_damage_date'=>'تاريخ تضرر الوحدة',
+        'undp_number'=>'رقم كرت اللجوء',
+        'units_count'=>'عدد الوحدات',
+        'building_type'=>'نوع المبنى',
+        
   ];

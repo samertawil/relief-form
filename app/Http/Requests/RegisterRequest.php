@@ -15,7 +15,7 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'idc' => ['numeric', 'min_digits:9', 'max_digits:9', 'exists:citizens,idc', 'unique:users,idc'],
+            'idc' => ['numeric', 'min_digits:9', 'max_digits:9', 'exists:ssn_login_ques_tb,idc', 'unique:users,idc'],
             'mobile' => ['required', 'numeric',  'unique:users,mobile', 'min_digits:10', 'max_digits:10'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
             'answer_q1'=>['required'],

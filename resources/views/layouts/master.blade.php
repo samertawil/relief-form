@@ -6,13 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="google" content="notranslate">
+
     <link rel="stylesheet" href="{{ asset('css/bootstrap.rtl.css') }}">
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
-
- 
-
+{{--  
+       <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://drive.google.com/uc?export=view&id=1yTLwNiCZhIdCWolQldwq4spHQkgZDqkG"> --}}
+     
+    <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     @yield('css-link')
     <title>{{ env('APP_NAME') }}</title>
 

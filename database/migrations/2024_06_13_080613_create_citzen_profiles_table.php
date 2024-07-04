@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('citizenProfiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('citizen_id')->nullable()->constrained('citizens');
+            $table->foreignId('citizen_idc')->nullable()->constrained('citizens');
            $table->foreignId('user_id')->unique()->constrained('users');
            $table->foreignId('current_address_status')->nullable()->constrained('statuses')->nullOnDelete()->comment('store address اذ كان المواطن مقيم في عنوانه الاصلي او نازح');
            $table->string('mobile1')->unique();

@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Modules\status\Http\Controllers\settingcontrollers\SystemnameController;
-use App\Modules\status\Http\Controllers\status\StatusController;
+use App\Modules\Status\Http\Controllers\settingcontrollers\SystemnameController;
+use App\Modules\Status\Http\Controllers\status\StatusController;
 
 Route::middleware(['guest', 'web','auth'])->group(function () {
 

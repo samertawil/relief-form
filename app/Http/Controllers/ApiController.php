@@ -11,7 +11,7 @@ class ApiController extends Controller
 
     public function api_idc($idc)
     {
-        $currentCitizen = citizen::current_user_citizen_id($idc);
+        $currentCitizen = citizen::current_user_citizen_idc($idc);
  
              return response($currentCitizen, 200);
     }

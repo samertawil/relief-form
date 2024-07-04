@@ -16,6 +16,8 @@
                 'type' => $address->address_type,
             ])
 
+            @include('layouts.2button')
+
         </form>
 
     </section>

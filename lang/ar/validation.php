@@ -20,7 +20,7 @@ return [
     'accepted_if' => 'The :attribute must be accepted when :other is :value.',
     'active_url' => 'The :attribute is not a valid URL.',
     'after' => 'The :attribute must be a date after :date.',
-    'after_or_equal' => 'The :attribute must be a date after or equal to :date.',
+    'after_or_equal' => 'الحقل :attribute لا يمكن ان يكون اقل من تاريخ 7/10/2023 .',
     'alpha' => 'The :attribute must only contain letters.',
     'alpha_dash' => 'The :attribute must only contain letters, numbers, dashes and underscores.',
     'alpha_num' => 'The :attribute must only contain letters and numbers.',
@@ -204,6 +204,8 @@ return [
         'missing_date'=>'تاريخ الفقد',
         'building_type'=>'نوع المبنى',
         'building_name'=>'اسم المبنى',
+        'damage_date'=>'تاريخ الضرر',
+       
        ],
 
 ];

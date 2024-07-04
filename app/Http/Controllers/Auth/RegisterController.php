@@ -54,8 +54,8 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(), []);
 
         $citizen = citizen::where('idc', $idc)->first();
-
-        if (!($citizen->birthday == $request->birthday)) {
+ 
+        if (!($citizen->CI_BIRTH_DT == $request->birthday)) {
 
             $validator->errors()->add('birthday', 'تاريخ الميلاد غير صحيح');
             return redirect()->back()->withErrors($validator)->withInput();
@@ -69,7 +69,7 @@ class RegisterController extends Controller
         
 
 
-        $full_name = ($citizen->first_name . ' ' . $citizen->sec_name . ' ' . $citizen->thr_name . ' ' . $citizen->last_name);
+        $full_name = ($citizen->CI_FIRST_ARB . ' ' . $citizen->CI_FATHER_ARB . ' ' . $citizen->CI_GRAND_FATHER_ARB . ' ' . $citizen->CI_FAMILY_ARB);
 
         $user =  User::create([
             'idc' => $idc,
