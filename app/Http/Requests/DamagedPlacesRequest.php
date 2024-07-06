@@ -19,8 +19,10 @@ class DamagedPlacesRequest extends FormRequest
         $rules= [
             'created_by'    => ['required', 'exists:citizen_profiles,id'], 
             'creator_type'  =>['nullable','in:citizen,employee'],
-            'building_name' =>['required',Rule::unique('damaged_residential_places','created_by')],
-            'damage_date'   =>['required','before_or_equal:now','after_or_equal:"07-10-2023"'],
+            'building_name' =>['required',Rule::unique('damaged_residential_places')->where(function ($query){
+                return $query->where('created_by',$this->user()->profile->id);
+            }  )],
+            'damage_date'   =>['required','date','before_or_equal:now','after_or_equal:"07-10-2023"'],
             'building_type' =>['required'],
             'region_id'                 => ['required'],
             'city_id'                   => ['required'],

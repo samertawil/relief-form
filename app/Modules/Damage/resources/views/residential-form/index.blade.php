@@ -4,7 +4,7 @@
     <div class="container">
         <div class="card">
 
-
+@include('layouts._alert-session')
             <div class="card-header text-center bg-light "style="float:none ">
                 <p class="lead fw-bold ">استبانة حصر المنشاءات السكنية المتضررة </p>
             </div>
@@ -16,48 +16,76 @@
                         السكني نفسه والنموذج الثاني لادخال بيانات الوحدات المكونة للمبنى مع صاحب كل وحدة سكنية </p>
 
                     <p>النموذج الاول: <a href="{{ route('damages.places.create') }}">اضافة مبنى</a></p>
-
-                    <table class="table hover border striper mb-5" id="mytable">
+               
+                    <table class="table bg-light hover border striper mb-5" id="mytable">
 
                         <thead>
                             <tr class="thead-light">
                                 <th>اسم المبنى</th>
                                 <th>العنوان</th>
+                                <th>الاجراءات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                @forelse ($damagedPlaces as $place)
+                            @forelse ($myDamagedPlaces as $place)
+                                <tr>
                                     <td>{{ $place->building_name }}</td>
                                     <td>{{ $place->address->cityname->city_name }}</td>
+                                    <td class="d-flex align-items-center justify-content-between">
 
-                                @empty
-                                @endforelse
+                                        <form action="{{route('damages.places.destroy',$place->id)}}" method="post">
+                                            <button type="submit" class="btn btn-lg"
+                                                onclick="return confirm('هل انت متأكد من مسح البيان ؟')"><i
+                                                    class=" m-auto fas fa-trash text-danger mx-3 h5"></i></button>
+        
+                                            @csrf
+                                            @method('delete')
+                                        </form>
+        
+                                    </td>
+        
+                                </tr>
+                            @empty
+                            @endforelse
 
-                            </tr>
+
                         </tbody>
                     </table>
 
-                    <p >النموذج الثاني: <a href="{{ route('damages.places.create') }}">اضافة حدات سكنية ومالكين</a></p>
-
-                    <table class="table hover border striper" id="mytable">
+                    <p>النموذج الثاني: <a href="{{ route('damages.units.create') }}">اضافة حدات سكنية ومالكين</a></p>
+                    
+                    <table class="table bg-light hover border striper" id="mytable">
 
                         <thead>
                             <tr class="thead-light">
+                                <th>اسم المالك / المستأجر</th>
                                 <th>اسم المبنى</th>
-                                <th>العنوان</th>
+                                <th>الاجراءات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                @forelse ($damagedPlaces as $place)
-                                    <td>{{ $place->building_name }}</td>
-                                    <td>{{ $place->address->cityname->city_name }}</td>
+                            @forelse ($myDamagedUnits as $units)
+                                <tr>
+                                    <td>{{ $units->profile->citizen->citizen_full_name }}</td>
+                                    <td>{{ $units->places->building_name }}</td>
+                                    <td class="d-flex align-items-center justify-content-between">
 
-                                @empty
-                                @endforelse
+                                        <form action="{{route('damages.units.destroy',$units->id)}}" method="post">
+                                            <button type="submit" class="btn btn-lg"
+                                                onclick="return confirm('هل انت متأكد من مسح البيان ؟')"><i
+                                                    class=" m-auto fas fa-trash text-danger mx-3 h5"></i></button>
+        
+                                            @csrf
+                                            @method('delete')
+                                        </form>
+        
+                                    </td>
+        
+                                </tr>
+                            @empty
+                            @endforelse
 
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>

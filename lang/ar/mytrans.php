@@ -31,5 +31,12 @@ return [
         'undp_number'=>'رقم كرت اللجوء',
         'units_count'=>'عدد الوحدات',
         'building_type'=>'نوع المبنى',
+        'damage_size'=>'حجم الضرر',
+        'places_id'=>'اسم المبنى',
+        'unit_type'=>'المقيم في الوحدة السكنية',
+        'citizen_type'=>'حالة المواطنة',
+        'get-help'=>'طلب دعم فني',
+        'created_by_idc'=>'رقم هوية مقدم الطلب',
+        'email'=>'البريد الالكتروني',
         
   ];

@@ -1,7 +1,8 @@
 @extends('layouts.master')
 
 @section('css-link')
-        <link rel="stylesheet" href="{{ asset('css/myTableResponsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/myTableResponsive.css') }}">
+    <link rel="stylesheet" href="{{asset('css/main.css')}}">
 @endsection
 
 
@@ -45,7 +46,7 @@
                 <div class="d-lg-flex justify-content-between ">
                     <div class="p-3">
 
-                        <label for="" class="form-label">{{(__('mytrans.idc'))}}</label>
+                        <label for="" class="form-label">{{ __('mytrans.idc') }}</label>
 
                         <input type="text" name="idc" id="idc" value="{{ old('idc') }}"
                             @class(['form-control', 'is-invalid' => $errors->has('idc')])>
@@ -96,23 +97,28 @@
 
 
                 <div class="dropdown-divider"></div>
+
                 <div class="mb-4">
-
-                    <div class="d-flex text-start p-3 align-items-center">
-                        <p class="text-primary mt-3 fw-bold">بيانات المبنى المستهدف: </p>
-                        <select name="from_building_name" id="" class="form-select w-lg-25 data-wrapper buildings">
-                            <option value="0">اختار مبنى</option>
-                       @foreach ($people->unique('building_name')  as $person)
-                     
-                           <option value="{{$person->id}}">{{$person->building_name . ' - في مدينة : ' .$person->address->cityname->city_name.' -  اقرب معلم  : '.$person->address->locname->location_name ?? '' .' - '.$person->address->address_name }}</option>
-                       @endforeach
-                        </select>
-                    </div>
-
-                    <div  class="d-lg-flex justify-content-between">
+                    @if (!$people->isEmpty())
+                        <div class="d-flex text-start p-3 align-items-center">
+                            <p class="text-primary mt-3 fw-bold">بيانات المبنى المستهدف: </p>
+                            <select name="from_building_name" id=""
+                                class="form-select w-lg-25 data-wrapper buildings">
+                                <option value="0" hidden>اختار مبنى</option>
+                                @foreach ($people->unique('building_name') as $person)
+                                    <option value="{{ $person->id }}">
+                                        {{ $person->building_name ?? ('' . ' - في مدينة : ' . $person->address->cityname->city_name ?? ('' . ' -  اقرب معلم  : ' . $person->address->locname->location_name ?? '' . ' - ' . $person->address->address_name)) }}
+                                    </option>
+                                @endforeach
+                                <option value="0" class="text-primary">ادخال بيانات مبنى اخر</option>
+                            </select>
+                        </div>
+                    @endif
+                    <div class="d-lg-flex justify-content-between">
 
                         <div class="p-3" id="building_name_div">
-                            <label for="" class="form-label"> {{__('mytrans.building_name')}}</label>
+                            <label for="" class="form-label"> {{ __('mytrans.building_name') }}</label> <span
+                                style="font-size: 10px;" class="text-muted">مثال:بيت عائلة ال**,عمارة الوطن </span>
                             <input type="text" name="building_name" value="{{ old('building_name') }}"
                                 id="building_name" @class([
                                     'form-control',
@@ -122,21 +128,21 @@
                         </div>
 
                         <div class="p-3" id="floor_div">
-                            <label for="" class="form-label">{{__('mytrans.floor')}}</label>
+                            <label for="" class="form-label">{{ __('mytrans.floor') }}</label>
                             <input type="number" name="floor" min="1" max="25" id="floor"
-                                @class(['form-control', 'is-invalid' => $errors->has('floor')])>
+                                value="{{ old('floor') }}" @class(['form-control', 'is-invalid' => $errors->has('floor')])>
                             @include('layouts._show-error', ['field_name' => 'floor'])
                         </div>
 
-                        <div class="px-2 d-flex " style="margin-top:35px;" >
-                            <div  id="building_type_div2">
+                        <div class="px-2 d-flex " style="margin-top:35px;">
+                            <div id="building_type_div2">
                                 <label for="" class="form-label p-2 text-center">نوع المبنى:</label>
                             </div>
                             @foreach (config('damagmodule')['buildingType'] as $key => $buildingType)
                                 <div class=" p-2" id="building_type_div">
 
 
-                                    <input   type="radio" name="building_type" id="building_type{{ $buildingType }}"
+                                    <input type="radio" name="building_type" id="building_type{{ $buildingType }}"
                                         value="{{ $buildingType }}" @checked(old('building_type') == $buildingType)
                                         @class([
                                             'a1',
@@ -149,8 +155,8 @@
                             @endforeach
                             @include('layouts._show-error', ['field_name' => 'building_type'])
                         </div>
-                        
-                        
+
+
 
                     </div>
 
@@ -158,14 +164,14 @@
 
 
 
-<div id="address_form_id">
-    @include('AddressModule::address._address-form', [
-        'address_title' => 'عنوان المبنى المستهدف',
-        'type' => 54,
-    ])
+                <div id="address_form_id">
+                    @include('AddressModule::address._address-form', [
+                        'address_title' => 'عنوان المبنى المستهدف',
+                        'type' => 54,
+                    ])
 
-</div>
-           
+                </div>
+
 
 
 
@@ -179,10 +185,10 @@
         </form>
 
         <main>
-            <div role="region" aria-labelledby="Cap1" tabindex="0">
+            <div class="bg-light" role="region" aria-labelledby="Cap1" tabindex="0">
                 <table class=" table hover container " id="mytable">
 
-                    <tr class="m-auto">
+                    <tr class="m-auto thead-light ">
                         <th>اسم المفقود</th>
                         <th>تاريخ الفقد</th>
                         <th>مقيم/نازح</th>
@@ -233,11 +239,6 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/myTableResponsive.js') }}"></script>
     <script>
-        $('#btn1').on("click", function() {
-            alert('dsds');
-        });
-
-
         $('#idc').on('change', function() {
             let idcvalue = $('#idc').val();
             let route = "{{ route('api.get.idc') }}";
@@ -247,7 +248,8 @@
                 url: route + '/' + idcvalue,
                 success: function(res) {
 
-                    let card = `<p>  صاحب الهوية: ` + res['CI_FIRST_ARB'] + ' ' + res['CI_FATHER_ARB'] + ' ' +
+                    let card = `<p class="text-sm mr-2 text-muted">   ` + res['CI_FIRST_ARB'] + ' ' +
+                        res['CI_FATHER_ARB'] + ' ' +
                         res['CI_GRAND_FATHER_ARB'] + ' ' + res['CI_FAMILY_ARB'] + `</p>`;
 
                     $('#citzenname').append(card);
@@ -258,26 +260,25 @@
         })
     </script>
 
-    <script>
 
-             $('.buildings').on('change',function() {	
- 	
-             let x=  $(this).val();	
-                if(x!=0) {
-                    $('#building_name_div').addClass( "d-none" );
-                    $('#floor_div').addClass( "d-none" );
-                    $('#building_type_div2').addClass( "d-none" );
-                    $('#building_type_div input,#building_type_div label').addClass( "d-none" );
-                    $('#address_form_id').addClass( "d-none" );
-                   
-                } else {
-                    $('#building_name_div').removeClass( "d-none" );
-                    $('#floor_div').removeClass( "d-none" );
-                    $('#building_type_div2').addClass( "d-none" );
-                    $('#building_type_div input, #building_type_div label').removeClass( "d-none" );
-                    $('#address_form_id').removeClass( "d-none" );
-                }
-            });
-       
+    <script>
+        $('.buildings').on('change', function() {
+
+            let x = $(this).val();
+            if (x != 0) {
+                $('#building_name_div').addClass("d-none");
+                $('#floor_div').addClass("d-none");
+                $('#building_type_div2').addClass("d-none");
+                $('#building_type_div input,#building_type_div label').addClass("d-none");
+                $('#address_form_id').addClass("d-none");
+
+            } else {
+                $('#building_name_div').removeClass("d-none");
+                $('#floor_div').removeClass("d-none");
+                $('#building_type_div2').addClass("d-none");
+                $('#building_type_div input, #building_type_div label').removeClass("d-none");
+                $('#address_form_id').removeClass("d-none");
+            }
+        });
     </script>
 @endsection

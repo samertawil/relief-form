@@ -25,14 +25,15 @@
                 <div class=" fw-bolder h4 text-dark d-flex justify-content-center align-items-center">
 
                     <strong class="mx-2">الخدمات الالكترونية الموحدة</strong>
-    
-                    <div class="mx-2"  style="width: 90px; height: 100px;">
-                        <img src="{{ asset('assets/media/pal.png') }}" alt="palestine" style="width: 100%; height: 100%;">
+
+                    <div class="mx-2" style="width: 90px; height: 100px;">
+                        <img src="{{ asset('assets/media/pal.png') }}" alt="palestine"
+                            style="width: 100%; height: 100%;">
                     </div>
-                    
+
                 </div>
             </div>
-           
+
 
             <div class="row justify-content-center">
                 <div class="col-md-6">
@@ -84,24 +85,28 @@
                                     </button>
                                 </div>
                             </form>
-                        
+
 
                             <div class="d-md-flex justify-content-between">
                                 <div class="mb-4" id="change_id">
-                                    <a href="{{route('change.password.form')}}" id="btn1"
+                                    <a href="{{ route('change.password.form') }}" id="btn1"
                                         class="text-decoration-none ">{{ __('mytrans.Forgot Your Password') }} ؟ </a>
                                 </div>
                                 <a href="{{ route('register.create') }}"
                                     class="text-decoration-none">{{ __('mytrans.register_new_account') }}</a>
                             </div>
+<div class="my-4">
 
+    <a href="{{ route('gethelp') }}"
+    class="text-decoration-none">{{ __('mytrans.get-help') }}</a>
+</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-   
+
     <script src="{{ asset('js/bootstrap.js') }}"></script>
     <script src="{{ asset('js/jQuery.js') }}"></script>
 

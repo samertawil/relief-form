@@ -29,8 +29,8 @@
               الابلاغ عن اضرار 
                         </button>
                         <div class="dropdown-menu" aria-labelledby="address_menu">
-                            <a class="dropdown-item" href="{{route('damages.missing.create')}}">استبانة مفقودين تحت الانقاض</a>
-                            <a class="dropdown-item" href="{{route('damages.places.create')}}">استبانة حصر الاضرار السكنية</a>
+                            <a class="dropdown-item" href="{{route('damages.missing.index')}}">استبانة مفقودين تحت الانقاض</a>
+                            <a class="dropdown-item" href="{{route('damages.places.index')}}">استبانة حصر الاضرار السكنية</a>
                           
                         </div>
                     </div>

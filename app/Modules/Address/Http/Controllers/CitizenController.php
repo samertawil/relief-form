@@ -28,7 +28,7 @@ class citizenController extends Controller
                 'mobile1'                   => $request->mobile1,
                 'mobile2'                   => $request->mobile2,
                 'email'                     => $request->email,
-                // 'citizen_idc'               => $citizenIdc->idc,
+                'citizen_idc'               => $citizenIdc->idc,
             ]
         ], uniqueBy: ['user_id'], update: ['current_address_status', 'mobile1', 'mobile2', 'email']);
         return redirect()->route('main.page')->with('message', 'تم حفظ البيانات بنجاح')->with('type', 'success');

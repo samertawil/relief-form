@@ -2,7 +2,8 @@
 
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DamagedUnitsController;
+ 
+use App\Modules\Damage\Http\Controllers\forms\DamagedUnitsController;
 use App\Modules\Damage\Http\Controllers\forms\DamagedPlacesController;
 
 Route::prefix('/damages/forms/places/')->name('damages.places.')->middleware('web', 'auth')->group(function () {

@@ -41,7 +41,7 @@ class RegisterController extends Controller
     {
 
         $citizen = citizen::where('idc', $request->idc)->first();
-
+ 
         return view('auth-relief-forms.register', compact('citizen'));
     }
 

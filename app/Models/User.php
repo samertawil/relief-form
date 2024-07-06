@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public   function citizendata()
     {
-        return $this->hasOne(citizen::class, 'id', 'idc');
+        return $this->hasOne(citizen::class, 'idc', 'idc');
     }
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\citizen;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ChangePasswordRequest extends FormRequest
@@ -15,7 +16,7 @@ class ChangePasswordRequest extends FormRequest
  
     public function rules()
     {
-        return [
+        $rules= [
             'idc' => [ 'numeric', 'min_digits:9', 'max_digits:9'],
             'birthday'=>['required'],
             // 'mobile' => ['required', 'numeric',   'min_digits:10', 'max_digits:10'],
@@ -23,6 +24,12 @@ class ChangePasswordRequest extends FormRequest
             'answer_q1'=>['required'],
             'answer_q2'=>['required'],
         ];
+        $data =  citizen::where('idc', $this->idc)->first();
+        if (!$data->q1) {
+            unset($rules['answer_q1']);
+            unset($rules['answer_q2']);
+        }
+        return $rules;
     }
 
     public function messages()

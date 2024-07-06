@@ -18,11 +18,12 @@ return new class extends Migration
             $table->foreignId('unit_type')->constrained('statuses'); // ألوحدة السكنية ملك , ايجار , خالية
             $table->date('unit_damage_date'); // ناريخ تضرر الوحدة  
             $table->foreignId('citizen_type')->constrained('statuses'); // مواطن ام لاجئ
-            $table->string('undp_number')->nullable()->unique(); // رقم كرت اللجوء
+            $table->string('undp_number')->nullable(); // رقم كرت اللجوء
+            $table->foreignId('created_by')->constrained('citizen_profiles'); // بروفايل مدخل البيان
             $table->foreignId('beneficiary_idc')->nullable()->constrained('ssn_login_ques_tb'); // هوية المستفيد
             $table->foreignId('owner_idc')->constrained('ssn_login_ques_tb'); // هوية مالك الوحدة السكنية
             $table->json('attachments')->nullable();  // مرفقات
-            $table->string('notes'); 
+            $table->string('notes')->nullable(); 
             $table->timestamps();
          
         });

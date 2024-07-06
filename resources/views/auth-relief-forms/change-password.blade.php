@@ -55,23 +55,7 @@
                                     <p></p>
                                 </div>
 
-                                {{-- <div class="row mb-3">
-                                    <label for="mobile"
-                                        class="col-md-4 col-form-label text-md-end">{{ __('mytrans.mobile') }} </label>
-
-                                    <div class="col-md-6">
-                                        <input id="mobile" type="number"
-                                            class="form-control @error('mobile') is-invalid @enderror" name="mobile"
-                                            value="{{ old('mobile') }}" autocomplete="mobile"
-                                            title="الرجاء ادخال رقم الهاتف الخليوي حينما قمت بالتسجيل اول مرة">
-
-                                        @error('mobile')
-                                            <span class="invalid-feedback" role="alert">
-                                                <small>{{ $message }}</small>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div> --}}
+                              
 
                                   <div class="row mb-3">
                                     <label for="birthday"
@@ -90,6 +74,8 @@
                                         @enderror
                                     </div>
                                 </div>
+
+                                @if ($citizen->q1)
                                 <div class="row mb-3">
 
                                     <label for="q1" class="col-md-4 col-form-label text-md-end">السؤال
@@ -111,30 +97,35 @@
                                     </div>
                                   
                                 </div>
+                                @endif
 
-                               
+                              
 
-                                <div class="row mb-3">
+                               @if ($citizen->q2)
+                               <div class="row mb-3">
 
-                                    <label for="q2" class="col-md-4 col-form-label text-md-end">السؤال
-                                        الثاني</label>
+                                <label for="q2" class="col-md-4 col-form-label text-md-end">السؤال
+                                    الثاني</label>
 
-                                    <div class="col-md-3">
-                                        <p id="q2_p" type="text" class="form-control border-0">
-                                         {{  $citizen->q2  }}؟
-                                        </p>
-
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <input name="answer_q2" value="{{old('answer_q2')}}"   @class([
-                                            'form-control',
-                                            'is-invalid' =>$errors->has('answer_q2')
-                                         ]) >
-                                           @include('layouts._show-error',['field_name'=>'answer_q2'])
-                                    </div>
+                                <div class="col-md-3">
+                                    <p id="q2_p" type="text" class="form-control border-0">
+                                     {{  $citizen->q2  }}؟
+                                    </p>
 
                                 </div>
+
+                                <div class="col-md-3">
+                                    <input name="answer_q2" value="{{old('answer_q2')}}"   @class([
+                                        'form-control',
+                                        'is-invalid' =>$errors->has('answer_q2')
+                                     ]) >
+                                       @include('layouts._show-error',['field_name'=>'answer_q2'])
+                                </div>
+
+                            </div>
+                               @endif
+
+                               
 
                                
                                 <div class="row mb-3">

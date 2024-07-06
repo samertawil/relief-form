@@ -1,8 +1,7 @@
 @extends('layouts.master')
 
 @section('css-link')
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/myTableResponsive.css') }}">
+
 
 @endsection
 
@@ -64,7 +63,7 @@
 
                             <div class="p-3 col-lg-3" id="building_name_div">
                                 <label for="building_name" class="form-label">{{ __('mytrans.building_name') }} <span
-                                        style="font-size: 11px;" class="text-muted">مثال:بيت عائلة ال**,عمارة الوطن </span>
+                                        style="font-size: 10px;" class="text-muted">مثال:بيت عائلة ال**,عمارة الوطن </span>
                                 </label>
 
                                 <input type="text" name="building_name" value="{{ old('building_name') }}"
@@ -78,14 +77,14 @@
                             <div class="p-3 col-lg-1" id="floor_div">
                                 <label style="width: 110px;" for="floor"
                                     class="text-start form-label">{{ __('mytrans.floor') }}</label>
-                                <input type="number" name="floor" min="1" max="25" id="floor"
+                                <input type="number" name="floor" min="1" max="25" id="floor" value="{{old('floor')}}"
                                     @class(['form-control', 'is-invalid' => $errors->has('floor')])>
                                 @include('layouts._show-error', ['field_name' => 'floor'])
                             </div>
                             <div class="p-3 col-lg-1" id="units_count_div">
                                 <label style="width: 110px;" for="units_count"
                                     class="text-start  form-label">{{ __('mytrans.units_count') }}</label>
-                                <input type="number" name="units_count" min="1" max="25" id="units_count"
+                                <input type="number" name="units_count" min="1" max="25" id="units_count" value="{{old('units_count')}}"
                                     @class(['form-control', 'is-invalid' => $errors->has('units_count')])>
                                 @include('layouts._show-error', ['field_name' => 'units_count'])
                             </div>
@@ -152,60 +151,19 @@
 
                 <div>
 
-                    @include('layouts.2button', ['name' => 'حفظ واستكمال'])
+                    @include('layouts.2button', ['name' => 'حفظ واستمرار'])
 
                 </div>
             </div>
             </div>
         </form>
- 
-        <main>
-            <div role="region" aria-labelledby="Cap1" tabindex="0">
-                <table class=" table hover container " id="mytable">
 
-                    <tr class="m-auto">
-                        <th>اسم المفقود</th>
-                        <th>تاريخ الفقد</th>
-                        <th>مقيم/نازح</th>
-                        <th>اسم المبنى المستهدف</th>
-                        <th>اسم اقرب معلم</th>
-                        <th>الاجراءات</th>
-
-                    </tr>
-
-
-                    <tr style=" align-items: center;">
-                        <td>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="d-flex align-items-center justify-content-between">
-
-                            <form action="#" method="post">
-                                <button type="submit" class="btn btn-lg"
-                                    onclick="return confirm('هل انت متأكد من مسح البيان ؟')"><i
-                                        class=" m-auto fas fa-trash text-danger mx-3 h5"></i></button>
-
-                                @csrf
-                                @method('delete')
-                            </form>
-
-                        </td>
-                    </tr>
-
-
-
-                </table>
-            </div>
-        </main>
     </section>
 
 
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/myTableResponsive.js') }}"></script>
+
     <script>
         $('#btn1').on("click", function() {
             alert('dsds');

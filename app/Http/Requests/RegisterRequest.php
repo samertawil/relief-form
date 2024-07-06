@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\citizen;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterRequest extends FormRequest
@@ -14,17 +15,20 @@ class RegisterRequest extends FormRequest
 
     public function rules()
     {
-        return [
+        $rules = [
             'idc' => ['numeric', 'min_digits:9', 'max_digits:9', 'exists:ssn_login_ques_tb,idc', 'unique:users,idc'],
             'mobile' => ['required', 'numeric',  'unique:users,mobile', 'min_digits:10', 'max_digits:10'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
-            'answer_q1'=>['required'],
-            'answer_q2'=>['required'],
-
+            'answer_q1' => ['required'],
+            'answer_q2' => ['required'],
 
         ];
-
-       
+        $data =  citizen::where('idc', $this->idc)->first();
+        if (!$data->q1) {
+            unset($rules['answer_q1']);
+            unset($rules['answer_q2']);
+        }
+        return $rules;
     }
     public function messages()
     {
@@ -37,7 +41,5 @@ class RegisterRequest extends FormRequest
             'confirmed' => 'يرجى تاكيد كلمة المرور بشكل صحيح',
 
         ];
-
-
     }
 }

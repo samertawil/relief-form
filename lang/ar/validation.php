@@ -205,6 +205,16 @@ return [
         'building_type'=>'نوع المبنى',
         'building_name'=>'اسم المبنى',
         'damage_date'=>'تاريخ الضرر',
+        'places_id'=>'اسم المبنى',
+        'owner_idc'=>'رقم هوية المالك',
+        'unit_damage_date'=>'تاريخ تضرر الوحدة',
+        'beneficiary_idc'=>'رقم هوية المستفيد',
+        'damage_size'=>'حجم الضرر',
+        'unit_type'=>'المقيم في الوحدة السكنية',
+        'citizen_type'=>'حالة المواطنة',
+        'email'=>'البريد الالكتروني',
+        
+              
        
        ],
 

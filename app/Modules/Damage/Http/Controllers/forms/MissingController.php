@@ -21,8 +21,8 @@ class MissingController extends Controller
     public function index()
     {
 
-        $people = MissingPeople::where('provider', Auth::user()->profile->id)->get();
-        dd($people);
+        $people = MissingPeople::with(['citizen', 'livingStatusName', 'address'])->where('provider', Auth::user()->profile->id)->get();
+        return  view('DamageModule::missing-form.index', compact('people'));
     }
 
 
@@ -97,10 +97,6 @@ class MissingController extends Controller
 
         $destroyMissing =  MissingPeople::findorfail($id);
         $destroyMissing->delete();
-        $destroyAddress = address::destroy($address_id);
-
-
-
 
         return redirect()->back()->with('message', 'تم الحذف بنجاح')->with('type', 'success');
     }

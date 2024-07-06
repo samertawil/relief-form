@@ -20,7 +20,7 @@
         <script>
             setTimeout(() => {
                 $('.alert').fadeOut()
-            }, 3000);
+            }, 4000);
         </script>
     @endif
 </body>
