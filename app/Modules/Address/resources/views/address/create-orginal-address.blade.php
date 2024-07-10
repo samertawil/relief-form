@@ -99,6 +99,6 @@
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/jQuery.js') }}"></script>
-    <script src="{{ asset('js/hidde.js') }}"></script>
+    {{-- <script src="{{ asset('js/hidde.js') }}"></script> --}}
       <script src="{{ asset('js/myTableResponsive.js') }}"></script>
 @endsection

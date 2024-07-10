@@ -13,4 +13,8 @@ body {
     /* background-color:#ebeacc !important; */
     /* background-color:#e6e5e1 !important; */
 }
+
+td{
+     vertical-align: middle !important; 
+}
  

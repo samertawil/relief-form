@@ -47,7 +47,7 @@
                     <div class="my-4 p-2">
 
                         <select name="places_id" @class(['form-select', 'is-invalid' => $errors->has('places_id')])>
-                            <option value=""><span class="text-muted">اختار المبنى </span></option>
+                            <option value="" hidden><span class="text-muted">اختار المبنى </span></option>
                             @foreach ($myDamagedPlaces as $place)
                                 <option value="{{ $place->id }}" {{ old('places_id') == $place->id ? 'selected' : '' }}>
                                     {{ $place->building_name . ' - ' . $place->address->cityname->city_name }} </option>
@@ -69,7 +69,7 @@
                                         'is-invalid' => $errors->has('owner_idc'),
                                     ])>
                                 @include('layouts._show-error', ['field_name' => 'owner_idc'])
-                                <p>w</p>
+                                <p></p>
                             </div>
 
 

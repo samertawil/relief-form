@@ -60,20 +60,20 @@
                             <tr class="thead-light">
                                 <th>اسم المبنى</th>
                                 <th>عدد الوحدات </th>
-                               
+                                <th>العنوان</th>
                                 <th>الاجراءات</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($unitCount as $unit)
                                 <tr>
-                                    <td>{{ $unit->building_name}}</td>
+                                    <td>{{ $unit->places->building_name }}</td>
                                     <td>{{ $unit->total }}</td>
-                                  
+                                    <td>{{ $unit->places->address->cityname->city_name }}</td>
                                     <td class="d-flex align-items-center justify-content-between">
 
-                                        <form action="{{ route('damages.places.destroy', $unit->master_places_id) }}" method="post">
-                                          
+                                        <form action="{{ route('damages.places.destroy', $unit->places->id) }}"
+                                            method="post">
                                             <button type="submit" class="btn btn-lg"
                                                 onclick="return confirm('هل انت متأكد من مسح البيان ؟')"><i
                                                     class=" m-auto fas fa-trash text-danger mx-3 h5"></i></button>

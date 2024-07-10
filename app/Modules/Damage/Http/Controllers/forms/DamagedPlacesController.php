@@ -25,8 +25,15 @@ class DamagedPlacesController extends Controller
 
         $damagedUnits = DamagedResidentialUnit::damagedUnits();
         $myDamagedUnits = $damagedUnits->where('created_by', Auth::user()->profile->id)->all();
+      
 
-        return view('DamageModule::residential-form.index', compact('myDamagedPlaces', 'myDamagedUnits'));
+        $unitCount = DB::table('damaged_places_units')
+        ->select('master_places_id','building_name', DB::raw('count(places_id) as total'))
+        ->groupBy('master_places_id','building_name')
+        ->get();
+        // dd( DB::table('damaged_places_units')->get());
+   
+        return view('DamageModule::residential-form.index', compact('myDamagedPlaces', 'myDamagedUnits','unitCount'));
     }
 
 
