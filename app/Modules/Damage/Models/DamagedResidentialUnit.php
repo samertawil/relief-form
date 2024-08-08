@@ -2,13 +2,18 @@
 
 namespace App\Modules\Damage\Models;
 
+ 
+use App\Models\citizen;
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\Address\Models\citizenProfile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Whoops\Exception\Formatter;
 
 class DamagedResidentialUnit extends Model
 {
     use HasFactory;
+
+ 
 
     protected $fillable=['places_id','damage_size','unit_type','unit_damage_date','citizen_type','undp_number','beneficiary_idc','owner_idc',	'attachments','notes', 'created_by'];
 
@@ -24,6 +29,14 @@ class DamagedResidentialUnit extends Model
 
     public function profile() {
         return $this->hasOne(citizenProfile::class,'id','created_by');
+        
     }
+
+    public function citizen() {
+        return $this->hasOne(citizen::class,'idc','owner_idc');
+    }
+
+  
+
     
 }

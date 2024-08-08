@@ -19,7 +19,7 @@ class DamagedPlacesController extends Controller
 {
     public function index()
     {
-
+        
         $DamagedPlaces = DamagedResidentialPlace::damagedPlaces();
         $myDamagedPlaces = $DamagedPlaces->where('created_by', Auth::user()->profile->id)->all();
 
@@ -31,19 +31,20 @@ class DamagedPlacesController extends Controller
         ->select('master_places_id','building_name', DB::raw('count(places_id) as total'))
         ->groupBy('master_places_id','building_name')
         ->get();
-        // dd( DB::table('damaged_places_units')->get());
+
    
         return view('DamageModule::residential-form.index', compact('myDamagedPlaces', 'myDamagedUnits','unitCount'));
+        
     }
 
 
     public function create()
     {
-
+       
         $profiles = new citizenProfile();
         $address = new address();
 
-        $regions = region::get();
+        $regions = region::regions();
         $people = [];
 
         return  view('DamageModule::residential-form.damages-places-form', compact('profiles', 'address', 'regions',));

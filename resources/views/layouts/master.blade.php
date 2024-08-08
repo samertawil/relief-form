@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="google" content="notranslate">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.rtl.css') }}">
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
-{{--  
-       <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+ 
+       {{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://drive.google.com/uc?export=view&id=1yTLwNiCZhIdCWolQldwq4spHQkgZDqkG"> --}}
      
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
@@ -64,6 +64,9 @@
     <script src="{{ asset('js/all.min.js') }}"></script>  
     <script src="{{ asset('js/bootstrap.js') }}"></script>
     <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script> 
+	
+    <script src="{{asset('js/loaders/blockui.min.js')}}"></script> 
+    <script src="{{asset('js/blockui.js')}}"></script> 
  
     @yield('js')
 </body>

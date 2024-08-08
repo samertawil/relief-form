@@ -25,4 +25,4 @@ Route:: middleware(['web','auth'])->group(function() {
  Route::get('/api/profile',[ApiController::class,'profile'])->name('api.profile');
 });
 
- Route::get('/api/test1/{value?}/{model?}',[ApiController::class,'api_test1'])->name('api.address');
+ Route::get('/api/address/{value?}/{model?}',[ApiController::class,'api_create_address'])->name('api.address');

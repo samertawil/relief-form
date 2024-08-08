@@ -19,26 +19,8 @@
 
         <form action="{{ route('damages.places.store') }}" method="post">
             @csrf
-            <input name="created_by" type="hidden" value="{{ Auth::user()->profile->id ?? 9999999999 }}"
-                class="form-control container">
-
-            <div class="container border mt-2 mb-5 bg-white ">
-                <div class="text-center">
-                    <p class="lead py-4 fw-bold ">استبانة حصر المنشاءات السكنية المتضررة <span class="text-danger fw-bolder text-center ">النموذج الاول</span> </p>
-                </div>
-             
-                <div class="dropdown-divider"></div>
-                <div>
-
-                    <div class="text-start p-3 d-flex">
-                        <p class="text-primary fw-bold"> مقدم الاستبانة:</p>
-                        <p> {{ Auth::user()->full_name }} </p>
-                        <p class="px-4"><span
-                                class="text-primary fw-bold">جوال:</span>{{ Auth::user()->profile->mobile1 ?? '' }} </p>
-                    </div>
-                </div>
-
-                <div class="dropdown-divider"></div>
+       
+         @include('layouts._title-header',['title'=>'استبانة حصر المنشاءات السكنية المتضررة/اضافة مبنى متضرر '])
 
                 <div class="container   mt-2 mb-5 bg-white ">
 
@@ -165,11 +147,7 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
 
     <script>
-        $('#btn1').on("click", function() {
-            alert('dsds');
-        });
-
-
+  
         $('#idc').on('change', function() {
             let idcvalue = $('#idc').val();
             let route = "{{ route('api.get.idc') }}";

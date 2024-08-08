@@ -2,11 +2,14 @@
 
 namespace App\Modules\Damage\Http\Controllers\forms;
 
+ 
+use App\Models\AllCitizen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Modules\Status\Models\status;
+use Illuminate\Support\Facades\Cache;
 use App\Modules\Address\Models\region;
 use App\Modules\Address\Models\address;
 use function Symfony\Component\String\b;
@@ -20,7 +23,8 @@ class MissingController extends Controller
 
     public function index()
     {
-
+  
+        
         $people = MissingPeople::with(['citizen', 'livingStatusName', 'address'])->where('provider', Auth::user()->profile->id)->get();
         return  view('DamageModule::missing-form.index', compact('people'));
     }
@@ -29,14 +33,13 @@ class MissingController extends Controller
 
     public function create()
     {
-
+  
         $profiles = new citizenProfile();
         $address = new address();
 
-        $regions = region::get();
+        $regions = region::regions();
         $people = MissingPeople::with(['citizen', 'livingStatusName', 'address'])->where('provider', Auth::user()->profile->id)->get();
-
-        return  view('DamageModule::missing-form.damages-missing-form', compact('profiles', 'address', 'regions', 'people'));
+           return  view('DamageModule::missing-form.damages-missing-form', compact('profiles', 'address', 'regions', 'people'));
     }
 
     public function store(MissingFormRequest $request)
@@ -68,9 +71,11 @@ class MissingController extends Controller
             else if ($data) {
                 $address = new address();
             }
-
+            $missingName=AllCitizen::findOrfail($request->idc)->FULL_NAME_AR;
+           
             MissingPeople::create([
                 'idc'           => $request->idc,
+                'missing_full_name'=>$missingName,
                 'created_by'    => $request->user()->profile->id,
                 'provider'      => $request->user()->profile->id,
                 'missing_date'  => $request->missing_date,
@@ -92,11 +97,13 @@ class MissingController extends Controller
         }
     }
 
-    public function destroy($id, $address_id)
+    public function destroy($id)
     {
 
         $destroyMissing =  MissingPeople::findorfail($id);
+        $destroyAddress=address::findorfail($destroyMissing->address_id);
         $destroyMissing->delete();
+        $destroyAddress->delete();
 
         return redirect()->back()->with('message', 'تم الحذف بنجاح')->with('type', 'success');
     }

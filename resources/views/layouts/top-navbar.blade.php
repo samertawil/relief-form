@@ -5,33 +5,54 @@
             <button class="navbar-toggler my-3" type="button" data-bs-toggle="collapse" data-bs-target=".navmenu">
                 <span class="navbar-toggler-icon " style="color: yellow !important;"></span>
             </button>
+ 
 
-
-            <div class="collapse navbar-collapse navmenu">
-                <ul class="navbar-nav" style="text-align: start;">
-                    <li id="t1" class="nav-item px-2"><a href="{{ url('/') }}" class="nav-link">الرئيسية</a>
+            <div class="collapse navbar-collapse navmenu ">
+                <ul class="navbar-nav " style="text-align: start;">
+                    <li id="t1" class="nav-item px-2"><a href="{{route('main.page')}}" class="nav-link">الرئيسية</a>
                     </li>
                     <li class="hidden nav-item px-2"><a href="{{ route('address.index') }}" class="nav-link">بياناتي</a>
                     </li>
-
-
-                    <div class=" hidden dropdown nav-item ">
+                    {{-- <div class=" hidden dropdown nav-item ">
                         <button class="btn  dropdown-toggle  nav-link" type="button" id="address_menu"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            الابلاغ عن اضرار
+                            المساعدات الإغاثية
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="address_menu">
-                            <a class="dropdown-item" href="{{ route('damages.missing.index') }}">استبانة مفقودين تحت
-                                الانقاض</a>
-                            <a class="dropdown-item" href="{{ route('damages.places.index') }}">استبانة حصر الاضرار
-                                السكنية</a>
+                        <div class="dropdown-menu text-right" aria-labelledby="address_menu">
+                            <a class="dropdown-item " href="#">الرئيسية </a>
+
+                            <a class="dropdown-item" href="{{ route('aid.myInfo') }}">
+                                استعلام عن الاستفادة</a>
 
                         </div>
-                    </div>
+                    </div> --}}
+                    @php
+                        $route = Route::current()->uri();
+                       
+                    @endphp
 
-                    <li class="nav-item px-2"><a href="#" class="nav-link">حول الاغاثة</a></li>
-                    <li class="nav-item px-2"><a href="{{ route('contact-us') }}" class="nav-link">اتصل بنا</a></li>
+                    @if ($route !== 'aid')
+                        <div class=" hidden dropdown nav-item ">
+                            <button class="btn  dropdown-toggle  nav-link" type="button" id="address_menu"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                الابلاغ عن اضرار
+                            </button>
+                            <div class="dropdown-menu text-right" aria-labelledby="address_menu">
+                                <a class="dropdown-item " href="{{ route('damages.missing.index') }}">استبانة مفقودين
+                                    تحت
+                                    الانقاض</a>
+                                {{-- <a class="dropdown-item " href="{{ route('damages.places.index') }}">استبانة حصر الاضرار
+                                    السكنية</a>
+                                <a class="dropdown-item " href="{{ route('damages.transports.index') }}">استبانة حصر
+                                    اضرار المواصلات
+                                </a> --}}
 
+                            </div>
+                        </div>
+             
+                    <li class="nav-item px-2"><a href="{{ route('about-us') }}" class="nav-link">حول الاغاثة</a></li>
+
+                    @endif
                 </ul>
             </div>
 

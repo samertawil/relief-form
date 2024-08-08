@@ -16,6 +16,7 @@ return [
      'required' => 'حقل :attribute مطلوب',
      'unique' => 'الحقل :attribute مكرر لنفس القيمة المدخلة.',
      'numeric' => 'الحقل :attribute يجب ان يكون ارقام.',
+     'image' => 'حقل :attribute يجب ان يكون من نوع صورة .',
     'accepted' => 'The :attribute must be accepted.',
     'accepted_if' => 'The :attribute must be accepted when :other is :value.',
     'active_url' => 'The :attribute is not a valid URL.',
@@ -68,7 +69,7 @@ return [
         'numeric' => 'The :attribute must be greater than or equal to :value.',
         'string' => 'The :attribute must be greater than or equal to :value characters.',
     ],
-    'image' => 'The :attribute must be an image.',
+   
     'in' => 'The selected :attribute is invalid.',
     'in_array' => 'The :attribute field does not exist in :other.',
     'integer' => 'The :attribute must be an integer.',
@@ -213,7 +214,15 @@ return [
         'unit_type'=>'المقيم في الوحدة السكنية',
         'citizen_type'=>'حالة المواطنة',
         'email'=>'البريد الالكتروني',
-        
+        'transport_category'=>'تصنيف الضرر',
+        'regestration_idc'=>' هوية المالك',
+        'transport_type'=>'نوع الضرر',
+        'transport_no'=>'رقم المركبة/المنشاه',
+        'attachments'=>'المرفقات',
+        'gender'=>'الجنس',
+        'marital_status'=>'الحالة الاجتماعية',
+        'missing_full_name'=>'اسم المفقود',
+        'missing_date'=>'تاريخ الفقد',
               
        
        ],

@@ -190,6 +190,7 @@ return [
         App\Modules\Address\Providers\AddressServiceProvider::class,
         App\Modules\Status\Providers\StatusServiceProvider::class,
         App\Modules\Damage\Providers\DamageServiceProvider::class,
+        App\Modules\Aid\Providers\AidServiceProvider::class,
        
      
 
@@ -201,6 +202,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        TimeHunter\LaravelGoogleReCaptchaV2\Providers\GoogleReCaptchaV2ServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
 
     ],
 
@@ -217,6 +220,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'GoogleReCaptchaV2'=> TimeHunter\LaravelGoogleReCaptchaV2\Facades\GoogleReCaptchaV2::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
+       
     ])->toArray(),
 
 ];

@@ -3,6 +3,7 @@
 namespace app\Modules\Damage\Models;
 
 use App\Models\citizen;
+
 use App\Modules\Status\Models\status;
 use App\Modules\Address\Models\address;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +15,7 @@ class MissingPeople extends Model
     use HasFactory;
  
 
-    protected $fillable = ['created_by','provider','idc', 'living_type', 'missing_date', 'building_name', 'floor', 'building_type', 'address_id', 'active'];
+    protected $fillable = ['created_by','provider','idc', 'living_type', 'missing_date', 'building_name', 'floor', 'building_type', 'address_id', 'active','missing_full_name'];
 
 
     public function citizen() {
@@ -28,5 +29,7 @@ class MissingPeople extends Model
     public function address() {
         return $this->hasOne(address::class,'id','address_id');
     }
+
+
     
 }

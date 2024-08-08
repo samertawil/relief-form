@@ -24,13 +24,9 @@
 
                 <div class=" fw-bolder h4 text-dark d-flex justify-content-center align-items-center">
 
-                    <strong class="mx-2">الخدمات الالكترونية الموحدة</strong>
+                    <strong class="mx-2"> اللجنة الوطنية للإغاثة</strong>
 
-                    <div class="mx-2" style="width: 90px; height: 100px;">
-                        <img src="{{ asset('assets/media/pal.png') }}" alt="palestine"
-                            style="width: 100%; height: 100%;">
-                    </div>
-
+                   
                 </div>
             </div>
 
@@ -88,10 +84,10 @@
 
 
                             <div class="d-md-flex justify-content-between">
-                                <div class="mb-4" id="change_id">
+                                {{-- <div class="mb-4" id="change_id">
                                     <a href="{{ route('change.password.form') }}" id="btn1"
                                         class="text-decoration-none ">{{ __('mytrans.Forgot Your Password') }} ؟ </a>
-                                </div>
+                                </div> --}}
                                 <a href="{{ route('register.create') }}"
                                     class="text-decoration-none">{{ __('mytrans.register_new_account') }}</a>
                             </div>

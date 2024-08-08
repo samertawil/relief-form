@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('areas', function (Blueprint $table) { // القرى او المناطق الصغيرة مثل منطقة المصدر او بئر النعجة او المغراقة
+        Schema::create('aid_areas', function (Blueprint $table) {  
             $table->id();
             $table->string('area_name');
-            $table->foreignId('city_id')->constrained('cities');
+            $table->foreignId('part_id')->nullable()->constrained('aid_parts');
             $table->timestamps();
         });
     }

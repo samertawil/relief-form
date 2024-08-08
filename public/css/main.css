@@ -10,11 +10,16 @@ body {
     margin: 0;
     font-family: 'Droid','Courier New', Courier, monospace !important;
     background-color:#f7f7f7 !important;
-    /* background-color:#ebeacc !important; */
-    /* background-color:#e6e5e1 !important; */
+
 }
 
 td{
      vertical-align: middle !important; 
 }
+
+.required:after {  
+    content: " *";  
+    color: red;  
+}  
+ 
  

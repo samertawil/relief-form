@@ -17,9 +17,9 @@ Route::get('/registration-form', [RegisterController::class, 'showRegistrationFo
 Route::post('/register/{idc}', [RegisterController::class, 'register_store'])->name('register.store')->middleware('guest');
 
 
-Route::get('/change-password-form', [ChangePasswordController::class, 'change_password_form'])->name('change.password.form')->middleware('guest');
+// Route::get('/change-password-form', [ChangePasswordController::class, 'change_password_form'])->name('change.password.form')->middleware('guest');
 
-Route::get('/change-password}', [ChangePasswordController::class, 'create'])->name('change.password')->middleware('guest');
+// Route::get('/change-password}', [ChangePasswordController::class, 'create'])->name('change.password')->middleware('guest');
 
 
-Route::post('/change-password-submit/{idc}', [ChangePasswordController::class, 'store'])->name('change.password.submit')->middleware('guest');
+// Route::post('/change-password-submit/{idc}', [ChangePasswordController::class, 'store'])->name('change.password.submit')->middleware('guest');

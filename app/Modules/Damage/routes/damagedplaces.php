@@ -17,7 +17,8 @@ Route::prefix('/damages/forms/places/')->name('damages.places.')->middleware('we
 
 Route::prefix('/damages/forms/units/')->name('damages.units.')->middleware('web', 'auth')->group(function () {
 
-    Route::get('create', [DamagedUnitsController::class, 'create'])->name('create');
+    Route::get('create/{places_id?}', [DamagedUnitsController::class, 'create'])->name('create');
     Route::post('store', [DamagedUnitsController::class, 'store'])->name('store');
+    Route::get('show/{id}',[DamagedUnitsController::class,'show'])->name('show');
     Route::delete('destroy/{id}', [DamagedUnitsController::class, 'destroy'])->name('destroy');
 });

@@ -25,7 +25,7 @@ class MissingFormRequest extends FormRequest
         $rules = [
             'created_by'    => ['required', 'exists:citizen_profiles,id'], // الموظف
             'provider'      => ['required', 'exists:citizen_profiles,id'], // صاحب التبليغ
-            'idc'           => ['required', 'exists:ssn_login_ques_tb,idc', Rule::unique('missing_people')->where(function ($query) {
+            'idc'           => ['required', 'exists:mysql1.users,id', Rule::unique('missing_people')->where(function ($query) {
                 return $query->where('provider', citizenProfile::profile()->id);
             }),],
             'living_type'               => ['required'],

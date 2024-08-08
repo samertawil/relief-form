@@ -8,6 +8,7 @@
     <meta name="google" content="notranslate">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.rtl.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
     <title>الدعم الفني</title>
 </head>
 
@@ -25,7 +26,7 @@
                         <div class="card-header">{{ __('mytrans.get-help') }}</div>
 
                         <div class="card-body">
-                            <form method="POST" action="{{route('getHelpstore')}}">
+                            <form method="POST" action="{{ route('getHelpstore') }}">
                                 @csrf
 
                                 <div class="row mb-3">
@@ -99,16 +100,17 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="subject" class="col-md-4 col-form-label text-md-end">  
+                                    <label for="subject" class="col-md-4 col-form-label text-md-end">
                                         الرجاء إختيار نوع الدعم المطلوب </label>
 
                                     <div class="col-md-6">
-                                        
-                                        <select name="subject" id="subject" class="form-select @error('subject') is-invalid @enderror">
+
+                                        <select name="subject" id="subject"
+                                            class="form-select @error('subject') is-invalid @enderror">
 
                                             <option value="" hidden>اختار</option>
-                                            @foreach (config('main')['technicalSupport'] as $key=>$value )
-                                            <option value="{{$value}}">{{$key}}</option>    
+                                            @foreach (config('main')['technicalSupport'] as $key => $value)
+                                                <option value="{{ $value }}">{{ $key }}</option>
                                             @endforeach
                                         </select>
                                         @error('subject')
@@ -139,7 +141,15 @@
 
 
 
-
+                                <div class="container my-5">
+                                    <img src="{{ captcha_src('my') }}" alt="captcha">
+                                    <div class="mt-2"></div>
+                                    <input 
+                                        type="text" name="captcha" class="form-control @error('captcha') is-invalid @enderror" placeholder=" ادخل كود التحقق "
+                                        >
+                                     @error('captcha') 
+                                     <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                                </div>
 
                                 <div class="row mb-0 ">
                                     <div class="col-md-6 offset-md-4 text-end">

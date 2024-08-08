@@ -18,28 +18,16 @@
     <section>
         <form action="{{ route('damages.missing.store') }}" method="post">
             @csrf
-            <input name="created_by" type="hidden" value="{{ Auth::user()->profile->id ?? 9999999999 }}"
-                class="form-control container">
+           
             <input name="provider" type="hidden" value="{{ Auth::user()->profile->id ?? 9999999999 }}"
                 class="form-control container">
-            <div class="container border mt-2 mb-5 bg-white ">
-                <div class="text-center">
-                    <p class="lead py-4 fw-bold ">استبانة حصر جثث الشهداء المتواجدين تحت الانقاض</p>
-                </div>
+       
+       
+                <input name="created_by" type="hidden" value="{{ Auth::user()->profile->id ?? 9999999999 }}"
+                class="form-control container">
 
+                @include('layouts._title-header',['title'=>'استبانة حصر جثث الشهداء المتواجدين تحت الانقاض '])
 
-                <div class="dropdown-divider"></div>
-                <div>
-
-                    <div class="text-start p-3 d-flex">
-                        <p class="text-primary fw-bold"> مقدم الاستبانة:</p>
-                        <p> {{ Auth::user()->full_name }} </p>
-                        <p class="px-4"><span
-                                class="text-primary fw-bold">جوال:</span>{{ Auth::user()->profile->mobile1 ?? '' }} </p>
-                    </div>
-                </div>
-
-                <div class="dropdown-divider"></div>
                 <div class="text-start p-3">
                     <p class="text-primary fw-bold">بيانات المفقود تحت الانقاض: </p>
                 </div>
@@ -189,8 +177,8 @@
                 <table class=" table hover container " id="mytable">
 
                     <tr class="m-auto thead-light ">
-                        <th>اسم المفقود</th>
-                        <th>تاريخ الفقد</th>
+                        <th>{{__('mytrans.missing_full_name')}}</th>
+                        <th>{{__('mytrans.missing_date')}}</th>
                         <th>مقيم/نازح</th>
                         <th>اسم المبنى المستهدف</th>
                         <th>اسم اقرب معلم</th>
@@ -200,21 +188,15 @@
 
                     @foreach ($people as $person)
                         <tr style=" align-items: center;">
-                            <td>{{ $person->citizen->CI_FIRST_ARB .
-                                ' ' .
-                                $person->citizen->CI_FATHER_ARB .
-                                ' ' .
-                                $person->citizen->CI_GRAND_FATHER_ARB .
-                                ' ' .
-                                $person->citizen->CI_FAMILY_ARB }}
-                            </td>
-                            <td>{{ date('d/m/Y', strtotime($person->missing_date)) }}</td>
+                     
+                            <td>{{ $person->missing_full_name??''  }} </td>          
+                            <td>{{ myDateStyle1($person->missing_date)  }}</td>
                             <td>{{ $person->livingStatusName->status_name }}</td>
                             <td>{{ $person->address->address_name ?? '' }}</td>
                             <td>{{ $person->address->locname->location_name ?? '' }}</td>
                             <td class="d-flex align-items-center justify-content-between">
 
-                                <form action="{{ route('damages.missing.destroy', [$person->id, $person->address_id]) }}"
+                                <form action="{{ route('damages.missing.destroy',  $person->id) }}"
                                     method="post">
                                     <button type="submit" class="btn btn-lg"
                                         onclick="return confirm('هل انت متأكد من مسح البيان ؟')"><i

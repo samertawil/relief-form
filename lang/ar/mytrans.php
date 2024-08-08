@@ -38,5 +38,18 @@ return [
         'get-help'=>'طلب دعم فني',
         'created_by_idc'=>'رقم هوية مقدم الطلب',
         'email'=>'البريد الالكتروني',
+        'transport_category'=>'تصنيف الضرر',
+        'regestration_idc'=>'رقم هوية المالك',
+        'transport_type'=>'نوع الضرر',
+        'transport_no'=>'رقم المركبة/المنشاه',
+        'attachments'=>'المرفقات',
+        'name'=>'الاسم',
+        'gender'=>'الجنس',
+        'mobile_primary'=>'الخليوي الاول',
+        'mobile_secondary'=>'الخليوي احتياط',
+        'marital_status'=>'الحالة الاجتماعية',
+        'missing_full_name'=>'اسم المفقود',
+        'missing_date'=>'تاريخ الفقد',
+      
         
   ];

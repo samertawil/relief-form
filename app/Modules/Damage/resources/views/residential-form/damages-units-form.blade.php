@@ -11,6 +11,9 @@
         @include('layouts._error-form')
 
         @include('layouts._alert-session')
+ 
+            
+        
     </div>
 
 
@@ -18,26 +21,8 @@
 
         <form action="{{ route('damages.units.store') }}" method="post" id="form">
             @csrf
-            <input name="created_by" type="hidden" value="{{ Auth::user()->profile->id ?? 9999999999 }}"
-                class="form-control container">
-
-            <div class="container border mt-2 mb-5 bg-white ">
-                <div class="text-center">
-                    <p class="lead py-4 fw-bold ">استبانة حصر المنشاءات السكنية المتضررة <span
-                            class="text-danger fw-bolder text-center ">النموذج الثاني</span> </p>
-                </div>
-
-                <div class="dropdown-divider"></div>
-                <div>
-
-                    <div class="text-start p-2 d-flex">
-                        <p class="text-primary fw-bold"> مقدم الاستبانة:</p>
-                        <p> {{ Auth::user()->full_name }} </p>
-                        <p class="px-4"><span
-                                class="text-primary fw-bold">جوال:</span>{{ Auth::user()->profile->mobile1 ?? '' }} </p>
-                    </div>
-                </div>
-
+            
+                @include('layouts._title-header',['title'=>'استبانة حصر المنشاءات السكنية المتضررة/  اضافة وحدة سكنية '])
 
                 <div class="container border mt-2 mb-5 bg-white ">
 
@@ -47,11 +32,18 @@
                     <div class="my-4 p-2">
 
                         <select name="places_id" @class(['form-select', 'is-invalid' => $errors->has('places_id')])>
-                            <option value="" hidden><span class="text-muted">اختار المبنى </span></option>
-                            @foreach ($myDamagedPlaces as $place)
-                                <option value="{{ $place->id }}" {{ old('places_id') == $place->id ? 'selected' : '' }}>
-                                    {{ $place->building_name . ' - ' . $place->address->cityname->city_name }} </option>
-                            @endforeach
+
+                            @if (!$place_id)
+                                <option value="" hidden><span class="text-muted">اختار المبنى </span></option>
+                                @foreach ($myDamagedPlaces as $place)
+                                    <option value="{{ $place->id }}"
+                                        {{ old('places_id', $place_id) == $place->id ? 'selected' : '' }}>
+                                        {{ $place->building_name }} </option>
+                                @endforeach
+                           
+                            @elseif($place_id)
+                            <option value="{{ $place_id }}"> {{ $myDamagedPlaces['building_name']}}  </option>
+                            @endif
                         </select> </a>
                         @include('layouts._show-error', ['field_name' => 'places_id'])
                     </div>
@@ -161,7 +153,7 @@
                                     value="{{ old('beneficiary_idc') }}" @class([
                                         'form-control getCitzenName',
                                         'is-invalid' => $errors->has('beneficiary_idc'),
-                                    ])>
+                                    ]) data-url="{{route('api.get.idc')}}">
                                 @include('layouts._show-error', ['field_name' => 'beneficiary_idc'])
                                 <p id="beneficiaryname"></p>
                             </div>
@@ -233,7 +225,7 @@
 
                             <td class="d-flex align-items-center justify-content-between">
 
-                                <form action="{{route('damages.units.destroy',$units->id)}}" method="post">
+                                <form action="{{ route('damages.units.destroy', $units->id) }}" method="post">
                                     <button type="submit" class="btn btn-lg"
                                         onclick="return confirm('هل انت متأكد من مسح البيان ؟')"><i
                                             class=" m-auto fas fa-trash text-danger mx-3 h5"></i></button>
@@ -290,12 +282,12 @@
         });
     </script>
 
-    
-</div>
- 
-    <script src="{{asset('js/idc.js')}}"> </script>
-        
-   
+
+    </div>
+
+    <script src="{{ asset('js/idc.js') }}"></script>
+
+
 
 
 @endsection

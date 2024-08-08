@@ -97,7 +97,7 @@
         <div id="collapse-address{{ $type ?? '' }}" class="collapse show"
             aria-labelledby="heading-address{{ $type ?? '' }}">
 
-            <div class="card-text">
+            <div class="card-text address-cont">
                 <div class="d-lg-flex">
 
                     <div class="form-group px-2 w20">
@@ -110,34 +110,38 @@
                             'is-invalid' => $errors->has('region_id'),
                         ])>
 
-                   {{-- <option value="" hidden><span class="text-gray">اختار</span></option> --}}
-                            <option {{$address->region_id?? 'hidden'}}  value="{{ $address->region_id ?? ''}}">{{ $address->regionname->region_name ?? 'اختار' }}
-                            </option>
-         
-                            @foreach ($regions->whereNotIn('id', $address->region_id) as $region)
-                                <option {{ old('region_id') == $region->id ? 'selected' : '' }}
-                                    value="{{ $region->id }}">
-                                    {{ $region->region_name }}</option>
-                            @endforeach
+                            <option value="" hidden><span class="text-gray">اختار</span></option>
+                            <option value="2" @selected( old('region_id') == 2 )>خانيونس</option>
+                            <option value="1" @selected( old('region_id') == 1 )>غزة</option>
+                            <option value="3" @selected( old('region_id') == 3 )>الشمال</option>
+                            <option value="4" @selected( old('region_id') == 4 )>الوسطى</option>
+                            <option value="5" @selected( old('region_id') == 5 )>رفح</option>
+
+                            {{-- <option value="1" @selected(old('region_id') ? old('region_id') == 1 : $address->region_id == 1)>غزة</option>
+                            <option value="2" @selected(old('region_id') ? old('region_id') == 2 : $address->region_id == 2)>خانيونس</option>
+                            <option value="3" @selected(old('region_id') ? old('region_id') == 3 : $address->region_id == 3)>الشمال</option>
+                            <option value="4" @selected(old('region_id') ? old('region_id') == 4 : $address->region_id == 4)>الوسطى</option>
+                            <option value="5" @selected(old('region_id') ? old('region_id') == 5 : $address->region_id == 5)>رفح</option> --}}
+
                         </select>
                         @include('layouts._show-error', ['field_name' => 'region_id'])
                     </div>
 
-                    <div class="form-group px-2 w20">
+                    <div class=" form-group px-2 w20 ">
                         <label for="city_id">المدينة</label>
+
                         <select name="city_id" id="city_id" @class([
                             'js-example-basic-single form-control',
                             'a1',
                             'is-invalid' => $errors->has('city_id'),
                         ])>
-                            <option {{ old('city_id') == $address->city_id ? ' selected' : '' }}
-                                value="{{ $address->city_id }}"> {{ $address->cityname->city_name ?? null }}</option>
+                            {{-- <option {{ old('city_id') == $address->city_id ? ' selected' : '' }}
+                                value="{{ $address->city_id }}"> {{ $address->cityname->city_name ?? null }}</option> --}}
 
-                            {{-- @foreach ($cities->whereNotIn('id', $address->city_id) as $city)
- <option {{ old('city_id') == $city->id ? 'selected' : '' }}
-     value="{{ $city->id }}">
-     {{ $city->city_name }}</option>
-@endforeach --}}
+                            @foreach ($oldCity as $city)
+                                <option value="{{ $city->id }}" @selected(old('city_id') == $city->id)>
+                                    {{ $city->city_name }} </option>
+                            @endforeach
                         </select>
                         @include('layouts._show-error', ['field_name' => 'city_id'])
                     </div>
@@ -150,14 +154,14 @@
                             'a1',
                             'is-invalid' => $errors->has('neighbourhood_id'),
                         ])>
-                            <option value="{{ $address->neighbourhood_id }}">
-                                {{ $address->neighbourhoodname->neighbourhood_name ?? null }}</option>
-                            {{-- @foreach ($neighbourhoods->whereNotIn('id', $address->neighbourhood_id) as $neighbourhood)
-                                <option {{ old('neighbourhood_id') == $neighbourhood->id ? 'selected' : '' }}
-                                    value="{{ $neighbourhood->id }}">
+                            {{-- <option value="{{ $address->neighbourhood_id }}">
+                                {{ $address->neighbourhoodname->neighbourhood_name ?? null }}</option> --}}
+                            @foreach ($oldneighbourhood as $neighbourhood)
+                                <option value="{{ $neighbourhood->id }}" @selected(old('neighbourhood_id') == $neighbourhood->id)>
+
                                     {{ $neighbourhood->neighbourhood_name }}
                                 </option>
-                            @endforeach --}}
+                            @endforeach
                         </select>
                         @include('layouts._show-error', ['field_name' => 'neighbourhood_id'])
                     </div>
@@ -171,13 +175,14 @@
                             'a1',
                             'is-invalid' => $errors->has('near_loc_id'),
                         ])>
-                            <option value="{{ $address->near_loc_id }}">{{ $address->locname->location_name ?? null }}
-                            </option>
-                            {{-- @foreach ($nearlocnames->whereNotIn('id', $address->near_loc_id) as $nearlocname)
-                                <option {{ old('near_loc_id') == $nearlocname->id ? 'selected' : '' }}
-                                    value="{{ $nearlocname->id }}">{{ $nearlocname->location_name }}
+                            {{-- <option value="{{ $address->near_loc_id }}">{{ $address->locname->location_name ?? null }}
+                            </option> --}}
+                            @foreach ($oldnearlocname as $nearlocname)
+                                <option value="{{ $nearlocname->id }}" @selected(old('near_loc_id') == $nearlocname->id)>
+                                    {{ $nearlocname->location_name }}
+
                                 </option>
-                            @endforeach   --}}
+                            @endforeach
                         </select>
                         @include('layouts._show-error', ['field_name' => 'near_loc_id'])
                     </div>
@@ -239,8 +244,13 @@
 
         $('.a1').on('change', function() {
             var val = $(this).val();
+
             var field_name = $(this).attr('name');
             var route = "{{ route('api.address') }}";
+
+
+            blockItem($('.address-cont'));
+
 
             $.ajax({
                 type: 'get',
@@ -248,19 +258,22 @@
                 success: function(res) {
 
                     if (field_name === 'region_id') {
+
                         res.forEach(element => {
+
                             var card =
                                 `<option  value="${element.id}">${element.city_name}</option>`
                             $('#city_id').append(card);
                         });
                     } else if (field_name === 'city_id') {
-                        let city_old = {{ old('city_id', 0) }};
-                        let city_select = '';
+
+
                         res.forEach(element => {
 
-                            if (city_old == element.id) city_select = 'selected';
-                            var card = '<option  ' + city_select + ' value=' + element.id +
-                                ' >' + element.neighbourhood_name + '</option>';
+
+                            var card =
+                                `<option  value="${element.id}">${element.neighbourhood_name}</option>`;
+
                             $('#neighbourhood_id').append(card);
                         });
                     } else if (field_name === 'neighbourhood_id') {
@@ -273,11 +286,8 @@
                         });
                     }
                 }
-            })
+            });
+            unblockItem($('.address-cont'));
         })
-
-        @if (old('city_id'))
-            $('#region_id').trigger('change');
-        @endif
     </script>
 @endsection

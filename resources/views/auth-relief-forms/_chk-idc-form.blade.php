@@ -6,21 +6,6 @@
 
         <div class="container  m-auto px-5  ">
 
-            <div>
-
-                <div class=" fw-bolder h4 text-dark d-flex justify-content-center align-items-center">
-
-                    <strong class="mx-2">الخدمات الالكترونية الموحدة</strong>
-
-                    <div class="mx-2" style="width: 90px; height: 100px;">
-                        <img src="{{ asset('assets/media/pal.png') }}" alt="palestine"
-                            style="width: 100%; height: 100%;">
-                    </div>
-
-                </div>
-            </div>
-         
-
                 <div class="row justify-content-center">
                     <div class="col-md-6">
                         <div class="card ">

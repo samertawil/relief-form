@@ -22,4 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/apiq/{idc?}',[ChangePasswordController::class,'apiq'])->name('api.idc.questions');
 
-Route::get('api-idc/{idc?}',[ApiController::class,'api_idc'])->name('api.get.idc');
+// Route::post('api-idc/{idc?}',[ApiController::class,'api_idc'])->name('api.get.idc');

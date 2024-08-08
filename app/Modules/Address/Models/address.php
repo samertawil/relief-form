@@ -26,9 +26,9 @@ class address extends Model
 
 
     public static function contacts_data() {
-
-        $nearlocs = status::select('id', 'status_name', 'p_id_sub')->wherein('p_id_sub', [2, 5, 10,])->get();
-
+ 
+        $nearlocs=  status::statuses()->wherein('p_id_sub', [2, 5, 10,]);
+    
         $profiles = citizenProfile::where('user_id', Auth::id())->first();
 
         $mobile = '';
@@ -84,4 +84,5 @@ class address extends Model
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+ 
 }

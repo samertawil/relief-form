@@ -5,6 +5,7 @@ namespace App\Modules\Damage\Models;
 use Illuminate\Support\Facades\Auth;
 use App\Modules\Address\Models\address;
 use Illuminate\Database\Eloquent\Model;
+use App\Modules\Address\Models\AddressName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DamagedResidentialPlace extends Model
@@ -21,6 +22,10 @@ class DamagedResidentialPlace extends Model
 
     public function address() {
         return $this->hasOne(address::class,'id','address_id');
+    }
+
+    public function addressName() {
+        return $this->hasOne(AddressName::class,'id','address_id');
     }
 }
  

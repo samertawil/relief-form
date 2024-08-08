@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\MainController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\settingcontrollers\SystemnameController;
 use Faker\Guesser\Name;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\settingcontrollers\SystemnameController;
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -17,10 +18,14 @@ Route::post('/getHelpstore',[MainController::class,'getHelpstore'])->name('getHe
 
 
 Route::get('/contact-us', function () {
-  return view('contact-us'); })->name('contact-us');
+  return view('contact-us');
+ })->name('contact-us');
 
-Route::get('/table-test', function () {
-  return view('table-test'); })->name('table-test');
+ Route::get('/about-us', function () {
+  return view('about-us');
+ })->name('about-us');
 
+
+Route::post('api-idc/{idc?}',[ApiController::class,'api_idc'])->name('api.get.idc');
 
 require __DIR__.'/AuthRoutes.php';
